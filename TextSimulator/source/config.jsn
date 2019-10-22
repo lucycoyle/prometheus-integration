@@ -1,0 +1,10 @@
+{
+	"size": 5*5,
+	"objects": [
+		"null",
+		"immovable",
+		"autonomous"
+	],
+	"robots": "6",
+	"database": "some db"	
+}

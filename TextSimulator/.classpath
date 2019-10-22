@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="ChrisProject/Previous project/Previous project/source/src"/>
+	<classpathentry kind="src" path="ChrisProject/Previous project/Previous project/test/src"/>
+	<classpathentry kind="src" path="source"/>
+	<classpathentry kind="lib" path="json-simple-1.1.jar"/>
+	<classpathentry kind="output" path="ChrisProject/Previous project/Previous project/NN Prometheus-Neural-Network-master/Prometheus-Neural-Network-master/Neural Network/bin"/>
+</classpath>
