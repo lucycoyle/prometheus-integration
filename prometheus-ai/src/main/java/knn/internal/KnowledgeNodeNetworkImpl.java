@@ -13,6 +13,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import com.google.inject.assistedinject.Assisted;
+
+import interfaces.LayerInput;
+import interfaces.LayerOutput;
+import interfaces.Tuple;
 import knn.api.KnowledgeNode;
 import knn.api.KnowledgeNodeNetwork;
 import tags.Tag;
@@ -20,7 +24,7 @@ import tags.Tag;
 /**
  * Implementation of the KNN.
  */
-class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
+class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, LayerOutput {
     private final Map<Tag, KnowledgeNode> mapKN;
     private final Set<Tag> activeTags;
     private final TreeSet<KnowledgeNode> ageSortedKNs;
@@ -190,5 +194,12 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 
     @Override
     public void save(final String dbFilename) {
+    }
+    
+    public void receiveDataStream(Tuple x) {
+    	
+    }
+    public void sendDataStream(Tuple x) {
+    	
     }
 }
