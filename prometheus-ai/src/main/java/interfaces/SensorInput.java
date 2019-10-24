@@ -1,0 +1,5 @@
+package interfaces;
+
+public interface SensorInput {
+	void receiveDataStream(int nnID, int nnStruct, int data[]);
+}

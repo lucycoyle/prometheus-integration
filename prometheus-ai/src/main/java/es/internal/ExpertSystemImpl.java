@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Set;
 import com.google.inject.assistedinject.Assisted;
 import es.api.ExpertSystem;
+import interfaces.LayerInput;
+import interfaces.LayerOutput;
+import interfaces.Tuple;
 import tags.Fact;
 import tags.Recommendation;
 import tags.Rule;
@@ -13,7 +16,7 @@ import tags.Tag;
 /**
  * Implementation of the ES.
  */
-class ExpertSystemImpl implements ExpertSystem {
+class ExpertSystemImpl implements ExpertSystem, LayerInput, LayerOutput {
     private final Thinker thinker;
     private final Teacher teacher;
     private final Rester rester;
@@ -144,5 +147,12 @@ class ExpertSystemImpl implements ExpertSystem {
     @Override
     public Set<Recommendation> getRecommendations() {
         return Collections.unmodifiableSet(recommendations);
+    }
+    
+    public void receiveDataStream(Tuple x) {
+    	
+    }
+    public void sendDataStream(Tuple x) {
+    	
     }
 }
