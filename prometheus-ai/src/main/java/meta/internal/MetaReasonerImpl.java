@@ -21,5 +21,5 @@ class MetaReasonerImpl implements MetaReasoner, LayerInput, MotorOutput {
     public void sendCommand(String motor, String command) {
     	
     }
-
 }
+

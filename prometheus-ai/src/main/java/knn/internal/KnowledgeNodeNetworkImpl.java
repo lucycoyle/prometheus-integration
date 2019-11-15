@@ -17,6 +17,7 @@ import com.google.inject.assistedinject.Assisted;
 import interfaces.LayerInput;
 import interfaces.LayerOutput;
 import interfaces.Tuple;
+import interfaces.Thinking;
 import knn.api.KnowledgeNode;
 import knn.api.KnowledgeNodeNetwork;
 import tags.Tag;
@@ -24,7 +25,8 @@ import tags.Tag;
 /**
  * Implementation of the KNN.
  */
-class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, LayerOutput {
+class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, LayerOutput, Thinking {
+
     private final Map<Tag, KnowledgeNode> mapKN;
     private final Set<Tag> activeTags;
     private final TreeSet<KnowledgeNode> ageSortedKNs;
@@ -195,11 +197,27 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, Laye
     @Override
     public void save(final String dbFilename) {
     }
-    
+
     public void receiveDataStream(Tuple x) {
     	
     }
     public void sendDataStream(Tuple x) {
     	
     }
+    public Tuple[] kn(Tuple tuples[]) {
+    	return tuples;
+    }
+    public Tuple[] think(int iterate, Tuple tuples[]) {
+    	for(Tuple t: tuples) {
+    		receiveDataStream(t);
+    	}
+    
+    	Tuple[] knOutput = kn(tuples);				//TODO: find real method signature for NN
+    	
+    	for(Tuple t: knOutput) {
+    		sendDataStream(t);						//TODO: modify tuple for use in kn
+    	}
+    	return knOutput;					//TODO: find out NN output format and implement modify method
+    }
+    
 }
