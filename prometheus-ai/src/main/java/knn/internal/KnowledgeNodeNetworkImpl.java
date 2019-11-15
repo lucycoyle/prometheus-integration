@@ -189,7 +189,7 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, Laye
         }
         return knowledgeNodes;
     }
-    Tuple[] t;
+
     @Override
     public void reset(final String dbFilename) {
     }
