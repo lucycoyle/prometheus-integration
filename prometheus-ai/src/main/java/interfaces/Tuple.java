@@ -1,6 +1,6 @@
 package interfaces;
 
-public abstract class Tuple {
+public class Tuple {
 	// All AI knowledge structures will be based on this class.
 	// Based on the following format: (label, parameters)
 	// Where “label” is a string
@@ -12,8 +12,20 @@ public abstract class Tuple {
 	String label; // The “label” from (label, params)
 	String sParams[]; // The “parameters” from (label,params)
 	int iParams[]; // int parameters from (label, params)
-	abstract void setTuple(String label, String[] sParams, int[] iParams);
-	abstract String getLabel();
-	abstract String[] getSParams();
-	abstract int[] getIParams();
+	
+	public void setTuple(String label, String[] sParams, int[] iParams) {
+		this.label = label;
+		this.sParams = sParams;
+		this.iParams = iParams;
+	}
+	
+	public String getLabel() {
+		return this.label;
+	}
+	public String[] getSParams() {
+		return this.sParams;
+	}
+	public int[] getIParams() {
+		return this.iParams;
+	}
 }
