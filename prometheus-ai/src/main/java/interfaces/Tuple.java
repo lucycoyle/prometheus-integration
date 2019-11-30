@@ -11,7 +11,7 @@ public class Tuple {
 	final int maxScore = 100;
 	String label; // The “label” from (label, params)
 	String sParams[]; // The “parameters” from (label,params)
-	int iParams[]; // int parameters from (label, params)
+	int iParams[]; // int parameters from (label, params)	
 	
 	public void setTuple(String label, String[] sParams, int[] iParams) {
 		this.label = label;

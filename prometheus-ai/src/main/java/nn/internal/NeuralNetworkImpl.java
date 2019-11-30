@@ -30,31 +30,37 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput, LayerOutput, Thin
     	x.setTuple(x.getLabel(), x.getSParams(), data);
     	
     }
-    public void receiveDataStream(int nnID, int nnStruct, int data[]) {
+    public void receiveDataStream(int nnID, int nnStruct, double data[]) {
     	for(int i = 0; i < data.length; i++) {
     		data[i] = 0;
     	}
     }
     
-    public Tuple modifyOutputFormat(int[] data, String name) {
+    public Tuple modifyOutputFormat(String[] labels, int[] data, String name) {
     	Tuple t = new Tuple();
-    	String s[] = new String[1];
-    	t.setTuple(name, s, data);
+    	t.setTuple(name, labels, data);
     	return t;
     }
     
-    public int[] nn(int[] input) {
-    	return input;
+    public double nn(double[] data, int sensorId) {
+    	return 0.9;
     }
+    
     public Tuple[] think(int iterate, Tuple tuples[]) {
-    	int[] data = new int[100];		
+    	double[] data = new double[2];		
+    	int[] output = new int[2];
     	Tuple[] tnnOutput = new Tuple[numSensors];
+    	String[] labels = new String[2];
     	
     	for(int i = 0; i < numSensors; i++) {
     		receiveDataStream(i, 0, data);
-    		int[] nnOutput = nn(data);	
+    		double nnOutput = nn(data, i);	
     		String name = "Sensor " + i;
-    		tnnOutput[i] = modifyOutputFormat(nnOutput, name);
+    		labels[0] = "distance";
+    		labels[1] = "probability";
+    		output[0] = (int) data[0];
+    		output[1] = (int) (nnOutput * 100);
+    		tnnOutput[i] = modifyOutputFormat(labels, output, name);
     	}
     	
     	for(Tuple t: tnnOutput) {
