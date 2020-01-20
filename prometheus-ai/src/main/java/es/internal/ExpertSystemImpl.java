@@ -7,6 +7,7 @@ import com.google.inject.assistedinject.Assisted;
 import es.api.ExpertSystem;
 import interfaces.LayerInput;
 import interfaces.LayerOutput;
+import interfaces.Thinking;
 import interfaces.Tuple;
 import tags.Fact;
 import tags.Recommendation;
@@ -16,7 +17,7 @@ import tags.Tag;
 /**
  * Implementation of the ES.
  */
-class ExpertSystemImpl implements ExpertSystem, LayerInput, LayerOutput {
+class ExpertSystemImpl implements ExpertSystem, LayerInput, LayerOutput, Thinking {
     private final Thinker thinker;
     private final Teacher teacher;
     private final Rester rester;
@@ -148,11 +149,36 @@ class ExpertSystemImpl implements ExpertSystem, LayerInput, LayerOutput {
     public Set<Recommendation> getRecommendations() {
         return Collections.unmodifiableSet(recommendations);
     }
-    
     public void receiveDataStream(Tuple x) {
-    	
+    	//Convert Tuple to Tag
+    	//Add Tag
     }
+
     public void sendDataStream(Tuple x) {
     	
+    }
+    public Tuple[] think(int iterate, Tuple tuples[]) {
+    	for(Tuple t: tuples) {
+    		receiveDataStream(t);
+    	}
+    	Set<Recommendation> recommendations = think();
+    	for(Recommendation r: recommendations) {
+    		addRecommendation(r);
+    	}
+    	recommendations = getRecommendations();
+    	Tuple[] recTuples = new Tuple[recommendations.size()];
+    	int tupleIndex = 0;
+    	
+    	for(Recommendation r : recommendations) {
+    		Tuple t = new Tuple();
+    		String [] sParams = new String[1];
+    		int[] iParams = new int[1];
+    		sParams[0] = "confidence";
+    		iParams[0] = (int)(r.getConfidence()*100);
+    		t.setTuple(r.toString(), sParams, iParams);
+    		recTuples[tupleIndex] = t;
+    		tupleIndex++;
+    	}
+    	return recTuples;
     }
 }
