@@ -20,6 +20,8 @@ import interfaces.Tuple;
 import interfaces.Thinking;
 import knn.api.KnowledgeNode;
 import knn.api.KnowledgeNodeNetwork;
+import knn.api.KnowledgeNodeParseException;
+import tags.Fact;
 import tags.Tag;
 
 /**
@@ -199,6 +201,22 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, Laye
     }
 
     public void receiveDataStream(Tuple x) {
+    	String [] info = new String [1];
+    	String thisTag= "Object(";
+    	for (int i=0;i<x.getIParams().length;i++) {
+    		thisTag+= x.getSParams()[i]+"="+x.getIParams()[i]+",";
+    		
+    	}
+    	thisTag+=")";
+    	info[0]=thisTag;
+    	KnowledgeNode kn= null;
+		try {
+			kn = new KnowledgeNode(info);
+		} catch (KnowledgeNodeParseException e) {
+			
+			e.printStackTrace();
+		}
+    	addKnowledgeNode(kn);
     	
     }
     public void sendDataStream(Tuple x) {
@@ -212,10 +230,18 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, Laye
     		receiveDataStream(t);
     	}
     
-    	Tuple[] knOutput = kn(tuples);				//TODO: find real method signature for NN
-    	
-    	for(Tuple t: knOutput) {
-    		sendDataStream(t);						//TODO: modify tuple for use in kn
+    	Set<Tag> knOutputTags = lambdaThink(0);		//0 for ply		
+    	Tuple[] knOutput= new Tuple [knOutputTags.size()];
+    	int i=0;
+    	for(Tag t: knOutputTags) {
+    		Tuple newTuple= new Tuple();
+    		String[] sparams= {t.toString()};
+    		int[] iparams= {100};
+    		newTuple.setTuple("Fact",sparams , iparams);
+    		
+    		sendDataStream(newTuple);		
+    		knOutput[i]=newTuple;
+    		i++;
     	}
     	return knOutput;					//TODO: find out NN output format and implement modify method
     }
