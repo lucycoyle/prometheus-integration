@@ -9,8 +9,6 @@ import interfaces.LayerInput;
 import interfaces.LayerOutput;
 import interfaces.Thinking;
 import interfaces.Tuple;
-import knn.api.KnowledgeNode;
-import knn.api.KnowledgeNodeParseException;
 import tags.Fact;
 import tags.Recommendation;
 import tags.Rule;
