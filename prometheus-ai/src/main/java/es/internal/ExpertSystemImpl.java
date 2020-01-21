@@ -9,6 +9,8 @@ import interfaces.LayerInput;
 import interfaces.LayerOutput;
 import interfaces.Thinking;
 import interfaces.Tuple;
+import knn.api.KnowledgeNode;
+import knn.api.KnowledgeNodeParseException;
 import tags.Fact;
 import tags.Recommendation;
 import tags.Rule;
@@ -150,8 +152,8 @@ class ExpertSystemImpl implements ExpertSystem, LayerInput, LayerOutput, Thinkin
         return Collections.unmodifiableSet(recommendations);
     }
     public void receiveDataStream(Tuple x) {
-    	//Convert Tuple to Tag
-    	//Add Tag
+    	Fact f = new Fact(x.getSParams()[0]);
+    	addTag(f);
     }
 
     public void sendDataStream(Tuple x) {
