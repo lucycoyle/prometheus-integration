@@ -18,7 +18,7 @@ public class Tuples implements Iterable {
 
 	@Override
 	public Iterator<Tuple> iterator() {
-		// TODO Auto-generated method stub
+
 		return new TuplesIterator(this);
 	}
 
