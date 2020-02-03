@@ -150,8 +150,8 @@ class ExpertSystemImpl implements ExpertSystem, LayerInput, LayerOutput, Thinkin
         return Collections.unmodifiableSet(recommendations);
     }
     public void receiveDataStream(Tuple x) {
-    	//Convert Tuple to Tag
-    	//Add Tag
+    	Fact f = new Fact(x.getSParams()[0]);
+    	addTag(f);
     }
 
     public void sendDataStream(Tuple x) {
