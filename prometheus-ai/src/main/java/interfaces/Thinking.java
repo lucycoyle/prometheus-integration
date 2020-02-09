@@ -7,5 +7,5 @@ public interface Thinking {
 	// layer interacts with the other. The interface assumes
 	// the following abstract view of the method:
 	// output_to_next_layer think(input_to_current_layer)
-	Tuple[] think(int iterate, Tuple tuples[]);
+	Tuples think(int iterate, Tuples tuples);
 }

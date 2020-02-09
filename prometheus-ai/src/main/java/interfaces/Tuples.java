@@ -11,8 +11,13 @@ public class Tuples implements Iterable {
 	public Tuples(ArrayList<Tuple> input) {
 		this.tupleList = input;
 	}
+	public Tuples() {
+		this.tupleList = new ArrayList<Tuple>();
+	}
 
-	public void add(Tuple t) {
+	public void add(String name, String[] labels, int[] data){
+		Tuple t = new Tuple();
+		t.setTuple(name, labels, data);
 		tupleList.add(t);
 	}
 
