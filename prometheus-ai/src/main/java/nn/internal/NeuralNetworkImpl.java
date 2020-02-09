@@ -2,35 +2,21 @@ package nn.internal;
 
 import javax.inject.Inject;
 
-import interfaces.LayerOutput;
 import interfaces.SensorInput;
 import interfaces.Thinking;
-import interfaces.Tuple;
 import interfaces.Tuples;
 import nn.api.NeuralNetwork;
 
 /**
  * Implementation of the NN.
  */
-class NeuralNetworkImpl implements NeuralNetwork, SensorInput, LayerOutput, Thinking {
+class NeuralNetworkImpl implements NeuralNetwork, SensorInput, Thinking {
 	int numSensors = 5;
 	
     @Inject
     NeuralNetworkImpl() {
     }
-    public void sendDataStream(Tuple x) {
-    	int[] data = x.getIParams();
-    	for(int i = 0; i < data.length; i++) {
-    		if(data[i] < -100) {
-    			data[i] = -100;
-    		}
-    		if(data[i] > 100) {
-    			data[i] = 100;
-    		}
-    	}
-    	x.setTuple(x.getLabel(), x.getSParams(), data);
-    	
-    }
+   
     public void receiveDataStream(int nnID, int nnStruct, double data[]) {
     	for(int i = 0; i < data.length; i++) {
     		data[i] = 0;
