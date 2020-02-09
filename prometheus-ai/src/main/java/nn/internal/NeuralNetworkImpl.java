@@ -6,6 +6,7 @@ import interfaces.LayerOutput;
 import interfaces.SensorInput;
 import interfaces.Thinking;
 import interfaces.Tuple;
+import interfaces.Tuples;
 import nn.api.NeuralNetwork;
 
 /**
@@ -36,20 +37,14 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput, LayerOutput, Thin
     	}
     }
     
-    public Tuple modifyOutputFormat(String[] labels, int[] data, String name) {
-    	Tuple t = new Tuple();
-    	t.setTuple(name, labels, data);
-    	return t;
-    }
-    
     public double nn(double[] data, int sensorId) {
     	return 0.9;
     }
     
-    public Tuple[] think(int iterate, Tuple tuples[]) {
+    public Tuples think(int iterate, Tuples tuples) {
     	double[] data = new double[2];		
     	int[] output = new int[2];
-    	Tuple[] tnnOutput = new Tuple[numSensors];
+    	Tuples tnnOutput = new Tuples();
     	String[] labels = new String[2];
     	
     	for(int i = 0; i < numSensors; i++) {
@@ -60,11 +55,7 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput, LayerOutput, Thin
     		labels[1] = "probability";
     		output[0] = (int) data[0];
     		output[1] = (int) (nnOutput * 100);
-    		tnnOutput[i] = modifyOutputFormat(labels, output, name);
-    	}
-    	
-    	for(Tuple t: tnnOutput) {
-    		sendDataStream(t);						
+    		tnnOutput.add(name, labels, output);
     	}
     	return tnnOutput;				
     }
