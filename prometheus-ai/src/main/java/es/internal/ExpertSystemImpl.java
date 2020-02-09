@@ -5,10 +5,9 @@ import java.util.Collections;
 import java.util.Set;
 import com.google.inject.assistedinject.Assisted;
 import es.api.ExpertSystem;
-import interfaces.LayerInput;
-import interfaces.LayerOutput;
 import interfaces.Thinking;
 import interfaces.Tuple;
+import interfaces.Tuples;
 import tags.Fact;
 import tags.Recommendation;
 import tags.Rule;
@@ -17,7 +16,7 @@ import tags.Tag;
 /**
  * Implementation of the ES.
  */
-class ExpertSystemImpl implements ExpertSystem, LayerInput, LayerOutput, Thinking {
+class ExpertSystemImpl implements ExpertSystem, Thinking {
     private final Thinker thinker;
     private final Teacher teacher;
     private final Rester rester;
@@ -149,35 +148,25 @@ class ExpertSystemImpl implements ExpertSystem, LayerInput, LayerOutput, Thinkin
     public Set<Recommendation> getRecommendations() {
         return Collections.unmodifiableSet(recommendations);
     }
-    public void receiveDataStream(Tuple x) {
-    	Fact f = new Fact(x.getSParams()[0]);
-    	addTag(f);
-    }
 
-    public void sendDataStream(Tuple x) {
-    	
-    }
-    public Tuple[] think(int iterate, Tuple tuples[]) {
-    	for(Tuple t: tuples) {
-    		receiveDataStream(t);
+    public Tuples think(int iterate, Tuples tuples) {
+    	for(Object t: tuples) {
+    		Fact f = new Fact(((Tuple) t).getSParams()[0]);
+        	addTag(f);
     	}
     	Set<Recommendation> recommendations = think();
     	for(Recommendation r: recommendations) {
     		addRecommendation(r);
     	}
     	recommendations = getRecommendations();
-    	Tuple[] recTuples = new Tuple[recommendations.size()];
-    	int tupleIndex = 0;
+    	Tuples recTuples = new Tuples();
     	
     	for(Recommendation r : recommendations) {
-    		Tuple t = new Tuple();
     		String [] sParams = new String[1];
     		int[] iParams = new int[1];
     		sParams[0] = "confidence";
     		iParams[0] = (int)(r.getConfidence()*100);
-    		t.setTuple(r.toString(), sParams, iParams);
-    		recTuples[tupleIndex] = t;
-    		tupleIndex++;
+    		recTuples.add(r.toString(), sParams, iParams);
     	}
     	return recTuples;
     }
