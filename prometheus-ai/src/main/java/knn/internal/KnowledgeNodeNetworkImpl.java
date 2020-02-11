@@ -8,15 +8,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import com.google.inject.assistedinject.Assisted;
-
+import interfaces.Tuple;
 import interfaces.LayerInput;
 import interfaces.LayerOutput;
-import interfaces.Tuple;
+
+import interfaces.Tuples;
 import interfaces.Thinking;
 import knn.api.KnowledgeNode;
 import knn.api.KnowledgeNodeNetwork;
@@ -27,7 +29,7 @@ import tags.Tag;
 /**
  * Implementation of the KNN.
  */
-class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, LayerOutput, Thinking {
+class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, Thinking {
 
     private final Map<Tag, KnowledgeNode> mapKN;
     private final Set<Tag> activeTags;
@@ -200,7 +202,7 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, Laye
     public void save(final String dbFilename) {
     }
 
-    public void receiveDataStream(Tuple x) {
+    public void processInputTuple(Tuple x) {
     	String [] info = new String [1];
     	String thisTag= "Object(";
     	for (int i=0;i<x.getIParams().length;i++) {
@@ -219,31 +221,24 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, LayerInput, Laye
     	addKnowledgeNode(kn);
     	
     }
-    public void sendDataStream(Tuple x) {
-    	
+public Tuples think(int iterate, Tuples tuples) {
+    Iterator<Tuple> iter= tuples.iterator();
+    while(iter.hasNext()) {
+    	Tuple t= iter.next();
+    	processInputTuple(t);
     }
-    public Tuple[] kn(Tuple tuples[]) {
-    	return tuples;
-    }
-    public Tuple[] think(int iterate, Tuple tuples[]) {
-    	for(Tuple t: tuples) {
-    		receiveDataStream(t);
-    	}
     
     	Set<Tag> knOutputTags = lambdaThink(0);		//0 for ply		
-    	Tuple[] knOutput= new Tuple [knOutputTags.size()];
+    	Tuples knOutput= new Tuples();
     	int i=0;
     	for(Tag t: knOutputTags) {
     		Tuple newTuple= new Tuple();
     		String[] sparams= {t.toString()};
-    		int[] iparams= {100};
-    		newTuple.setTuple("Fact",sparams , iparams);
-    		
-    		sendDataStream(newTuple);		
-    		knOutput[i]=newTuple;
+    		int[] iparams= {}; //paired?
+    		knOutput.add("Fact",sparams,iparams);
     		i++;
     	}
-    	return knOutput;					//TODO: find out NN output format and implement modify method
+    	return knOutput;					
     }
     
 }
