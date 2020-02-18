@@ -13,13 +13,13 @@ import tags.Tag;
 /**
  * Searcher which performs direct search in the KNN.
  */
-class DirectSearcher {
+public class DirectSearcher {
     private final Map<Tag, KnowledgeNode> mapKN;
     private final Set<Tag> activeTags;
     private final TreeSet<KnowledgeNode> ageSortedKNs;
 
     @Inject
-    DirectSearcher(
+	public DirectSearcher(
             @Assisted("mapKN") final Map<Tag, KnowledgeNode> mapKN,
             @Assisted("activeTags") final Set<Tag> activeTags,
             @Assisted("ageSortedKNs")

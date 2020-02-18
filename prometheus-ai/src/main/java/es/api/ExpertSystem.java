@@ -1,6 +1,8 @@
 package es.api;
 
 import java.util.Set;
+
+import interfaces.Thinking;
 import tags.Fact;
 import tags.Recommendation;
 import tags.Rule;
@@ -9,7 +11,7 @@ import tags.Tag;
 /**
  * Expert System (ES).
  */
-public interface ExpertSystem {
+public interface ExpertSystem extends Thinking {
     /**
      * Makes the ES think.
      *

@@ -11,7 +11,7 @@ import tags.Tag;
 /**
  * Guice factory for the direct searcher.
  */
-interface DirectSearcherFactory {
+public interface DirectSearcherFactory {
     /**
      * Creates the direct searcher.
      *

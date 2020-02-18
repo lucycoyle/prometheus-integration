@@ -6,7 +6,7 @@ import com.google.inject.assistedinject.Assisted;
 /**
  * Guice factory for the lambda searcher.
  */
-interface LambdaSearcherFactory {
+public interface LambdaSearcherFactory {
     /**
      * Creates the lambda searcher.
      *

@@ -8,12 +8,12 @@ import tags.Tag;
 /**
  * Searcher which performs lambda search in the KNN.
  */
-class LambdaSearcher extends Searcher<Set<Tag>> {
+public class LambdaSearcher extends Searcher<Set<Tag>> {
     private final ForwardSearcher forwardSearcher;
     private final BackwardSearcher backwardSearcher;
 
     @Inject
-    LambdaSearcher(
+	public LambdaSearcher(
             @Assisted final ForwardSearcher forwardSearcher,
             @Assisted final BackwardSearcher backwardSearcher) {
         this.forwardSearcher = forwardSearcher;

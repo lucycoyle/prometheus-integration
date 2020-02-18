@@ -12,13 +12,13 @@ import tags.Rule;
 /**
  * Thinker which executes thinking cycles.
  */
-class Thinker {
+public class Thinker {
     private final ThinkCycleExecutor thinkCycleExecutor;
     private final Set<Rule> readyRules;
     private final Set<Fact> facts;
 
     @Inject
-    Thinker(
+	public Thinker(
             @Assisted("readyRules") final Set<Rule> readyRules,
             @Assisted("activeRules") final Set<Rule> activeRules,
             @Assisted("facts") final Set<Fact> facts,

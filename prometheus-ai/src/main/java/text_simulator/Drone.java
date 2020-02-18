@@ -1,3 +1,4 @@
+package text_simulator;
 //robot with the AI
 
 import com.google.inject.Guice;

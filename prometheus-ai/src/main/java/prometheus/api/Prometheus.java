@@ -1,6 +1,7 @@
 package prometheus.api;
 
 import es.api.ExpertSystem;
+import interfaces.Tuples;
 import knn.api.KnowledgeNodeNetwork;
 import meta.api.MetaReasoner;
 import nn.api.NeuralNetwork;
@@ -28,4 +29,6 @@ public interface Prometheus {
      * @return the Meta Reasoner (META)
      */
     MetaReasoner getMetaReasoner();
+    
+    Tuples think(Tuples t);
 }

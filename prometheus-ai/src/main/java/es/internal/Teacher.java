@@ -13,7 +13,7 @@ import tags.Rule;
 /**
  * Teacher which creates Rules from natural language sentences.
  */
-class Teacher {
+public class Teacher {
     private static final Set<String> INPUT_TOKENS =
             new HashSet<>(Arrays.asList("if", "when", "while", "first"));
     private static final Set<String> OUTPUT_TOKENS =
@@ -21,7 +21,7 @@ class Teacher {
     private final Set<Rule> readyRules;
 
     @Inject
-    Teacher(
+	public Teacher(
             @Assisted("readyRules") final Set<Rule> readyRules) {
         this.readyRules = readyRules;
     }
