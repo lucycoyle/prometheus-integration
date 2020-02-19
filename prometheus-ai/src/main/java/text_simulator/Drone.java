@@ -182,6 +182,9 @@ public class Drone {
 		
 		try {
 			Action decision = convertToDecision(t);
+			if(decision == null) {
+				throw new indecisiveException("No decision found");
+			}
 			takeAction(decision);
 		}
 		catch(indecisiveException e) {
