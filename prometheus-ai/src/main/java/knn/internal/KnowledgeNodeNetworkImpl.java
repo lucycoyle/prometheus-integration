@@ -29,7 +29,7 @@ import tags.Tag;
 /**
  * Implementation of the KNN.
  */
-public class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, Thinking {
+class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, Thinking {
 
     private final Map<Tag, KnowledgeNode> mapKN;
     private final Set<Tag> activeTags;
@@ -64,26 +64,6 @@ public class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, Thinking 
                 backwardSearchAgeLimit);
         this.lambdaSearcher =
                 lambdaSearcherFactory.create(forwardSearcher, backwardSearcher);
-    }
-    public KnowledgeNodeNetworkImpl(
-            @Assisted("mapKN") final Map<Tag, KnowledgeNode> mapKN,
-            @Assisted("activeTags") final Set<Tag> activeTags,
-            @Assisted("ageSortedKNs") final TreeSet<KnowledgeNode> ageSortedKNs,
-            @Assisted("backwardSearchMatchRatio") final
-            double backwardSearchMatchRatio,
-            @Assisted("backwardSearchAgeLimit")
-            final long backwardSearchAgeLimit,
-            final DirectSearcher directSearcher,
-            final ForwardSearcher forwardSearcher,
-            final BackwardSearcher backwardSearcher,
-            final LambdaSearcher lambdaSearcher) {
-        this.mapKN = mapKN;
-        this.activeTags = activeTags;
-        this.ageSortedKNs = ageSortedKNs;
-        this.directSearcher = directSearcher;
-        this.forwardSearcher = forwardSearcher;
-        this.backwardSearcher = backwardSearcher;
-        this.lambdaSearcher = lambdaSearcher;
     }
 
     @Override

@@ -16,7 +16,7 @@ import tags.Tag;
 /**
  * Implementation of the ES.
  */
-public class ExpertSystemImpl implements ExpertSystem, Thinking {
+class ExpertSystemImpl implements ExpertSystem, Thinking {
     private final Thinker thinker;
     private final Teacher teacher;
     private final Rester rester;
@@ -44,26 +44,7 @@ public class ExpertSystemImpl implements ExpertSystem, Thinking {
         this.teacher = teacherFactory.create(readyRules);
         this.rester = resterFactory.create(readyRules);
     }
-    
-    public ExpertSystemImpl(
-            @Assisted("readyRules") final Set<Rule> readyRules,
-            @Assisted("activeRules") final Set<Rule> activeRules,
-            @Assisted("facts") final Set<Fact> facts,
-            @Assisted("recommendations")
-            final Set<Recommendation> recommendations,
-            Thinker thinker,
-            Teacher teacher,
-            Rester rester) {
-        this.readyRules = readyRules;
-        this.activeRules = activeRules;
-        this.facts = facts;
-        this.recommendations = recommendations;
-        this.thinker = thinker;
-        this.teacher = teacher;
-        this.rester = rester;
-    }
-
-
+   
 	@Override
     public Set<Recommendation> think() {
         return thinker.think(false, Integer.MAX_VALUE);
