@@ -10,7 +10,7 @@ import tags.Tag;
 /**
  * Guice factory for the backward searcher.
  */
-public interface BackwardSearcherFactory {
+interface BackwardSearcherFactory {
     /**
      * Creates the backward searcher.
      *

@@ -3,17 +3,17 @@ package nn.internal;
 import javax.inject.Inject;
 
 import interfaces.SensorInput;
-import interfaces.Thinking;
 import interfaces.Tuples;
 import nn.api.NeuralNetwork;
 
 /**
  * Implementation of the NN.
  */
-public class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
+class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
 	int numSensors = 5;
 	
-    public NeuralNetworkImpl() {
+	@Inject
+    NeuralNetworkImpl() {
     }
    
     public void receiveDataStream(int nnID, int nnStruct, double data[]) {

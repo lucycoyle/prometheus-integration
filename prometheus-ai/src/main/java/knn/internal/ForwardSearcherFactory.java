@@ -6,7 +6,7 @@ import com.google.inject.assistedinject.Assisted;
 /**
  * Guice factory for the forward searcher.
  */
-public interface ForwardSearcherFactory {
+interface ForwardSearcherFactory {
     /**
      * Creates a forward searcher.
      *

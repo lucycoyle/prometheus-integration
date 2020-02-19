@@ -10,11 +10,11 @@ import tags.Tag;
 /**
  * Searcher which performs forward search in the KNN.
  */
-public class ForwardSearcher extends Searcher<Set<Tag>> {
+class ForwardSearcher extends Searcher<Set<Tag>> {
     private final DirectSearcher directSearcher;
 
     @Inject
-	public ForwardSearcher(
+	ForwardSearcher(
             @Assisted final DirectSearcher directSearcher) {
         this.directSearcher = directSearcher;
     }

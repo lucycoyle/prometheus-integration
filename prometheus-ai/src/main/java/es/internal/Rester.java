@@ -8,12 +8,12 @@ import tags.Rule;
 /**
  * Rests the ES, generating merged rules.
  */
-public class Rester {
+class Rester {
     private final Set<Rule> readyRules;
     private final RuleMerger ruleMerger;
 
     @Inject
-	public Rester(
+	Rester(
             @Assisted("readyRules") final Set<Rule> readyRules,
             final RuleMerger ruleMerger) {
         this.readyRules = readyRules;

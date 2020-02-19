@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Set;
 import com.google.inject.assistedinject.Assisted;
 import es.api.ExpertSystem;
-import interfaces.Thinking;
 import interfaces.Tuple;
 import interfaces.Tuples;
 import tags.Fact;
@@ -16,7 +15,7 @@ import tags.Tag;
 /**
  * Implementation of the ES.
  */
-class ExpertSystemImpl implements ExpertSystem, Thinking {
+class ExpertSystemImpl implements ExpertSystem{
     private final Thinker thinker;
     private final Teacher teacher;
     private final Rester rester;

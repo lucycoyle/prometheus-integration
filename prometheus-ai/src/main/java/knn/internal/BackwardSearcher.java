@@ -12,7 +12,7 @@ import tags.Tag;
 /**
  * Searcher which performs backward search in the KNN.
  */
-public class BackwardSearcher extends Searcher<Set<Tag>> {
+class BackwardSearcher extends Searcher<Set<Tag>> {
     private final Set<Tag> activeTags;
     private final BackwardSearchMatcher backwardSearchMatcher;
     private final TreeSet<KnowledgeNode> ageSortedKNs;
@@ -20,7 +20,7 @@ public class BackwardSearcher extends Searcher<Set<Tag>> {
     private long ageLimit;
 
     @Inject
-	public BackwardSearcher(
+	BackwardSearcher(
             @Assisted("activeTags") final Set<Tag> activeTags,
             @Assisted("ageSortedKNs") final TreeSet<KnowledgeNode> ageSortedKNs,
             @Assisted("partialMatchRatio") final double partialMatchRatio,
