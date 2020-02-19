@@ -21,7 +21,7 @@ class Teacher {
     private final Set<Rule> readyRules;
 
     @Inject
-    Teacher(
+	Teacher(
             @Assisted("readyRules") final Set<Rule> readyRules) {
         this.readyRules = readyRules;
     }

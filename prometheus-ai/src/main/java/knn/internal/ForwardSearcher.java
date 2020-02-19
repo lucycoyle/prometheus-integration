@@ -14,7 +14,7 @@ class ForwardSearcher extends Searcher<Set<Tag>> {
     private final DirectSearcher directSearcher;
 
     @Inject
-    ForwardSearcher(
+	ForwardSearcher(
             @Assisted final DirectSearcher directSearcher) {
         this.directSearcher = directSearcher;
     }

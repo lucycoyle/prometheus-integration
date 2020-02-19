@@ -20,7 +20,7 @@ class BackwardSearcher extends Searcher<Set<Tag>> {
     private long ageLimit;
 
     @Inject
-    BackwardSearcher(
+	BackwardSearcher(
             @Assisted("activeTags") final Set<Tag> activeTags,
             @Assisted("ageSortedKNs") final TreeSet<KnowledgeNode> ageSortedKNs,
             @Assisted("partialMatchRatio") final double partialMatchRatio,

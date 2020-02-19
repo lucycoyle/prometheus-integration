@@ -3,17 +3,16 @@ package nn.internal;
 import javax.inject.Inject;
 
 import interfaces.SensorInput;
-import interfaces.Thinking;
 import interfaces.Tuples;
 import nn.api.NeuralNetwork;
 
 /**
  * Implementation of the NN.
  */
-class NeuralNetworkImpl implements NeuralNetwork, SensorInput, Thinking {
+class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
 	int numSensors = 5;
 	
-    @Inject
+	@Inject
     NeuralNetworkImpl() {
     }
    
@@ -28,6 +27,7 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput, Thinking {
     }
     
     public Tuples think(int iterate, Tuples tuples) {
+    	System.out.println("In the Neural Network");
     	double[] data = new double[2];		
     	int[] output = new int[2];
     	Tuples tnnOutput = new Tuples();

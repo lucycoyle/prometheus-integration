@@ -15,21 +15,17 @@ import java.util.Set;
 import java.util.TreeSet;
 import com.google.inject.assistedinject.Assisted;
 import interfaces.Tuple;
-import interfaces.LayerInput;
-import interfaces.LayerOutput;
 
 import interfaces.Tuples;
-import interfaces.Thinking;
 import knn.api.KnowledgeNode;
 import knn.api.KnowledgeNodeNetwork;
 import knn.api.KnowledgeNodeParseException;
-import tags.Fact;
 import tags.Tag;
 
 /**
  * Implementation of the KNN.
  */
-class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, Thinking {
+class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork{
 
     private final Map<Tag, KnowledgeNode> mapKN;
     private final Set<Tag> activeTags;
@@ -222,6 +218,7 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork, Thinking {
     	
     }
 public Tuples think(int iterate, Tuples tuples) {
+	System.out.println("In the Knowledge Node Network");
     Iterator<Tuple> iter= tuples.iterator();
     while(iter.hasNext()) {
     	Tuple t= iter.next();

@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Set;
 import com.google.inject.assistedinject.Assisted;
 import es.api.ExpertSystem;
-import interfaces.Thinking;
 import interfaces.Tuple;
 import interfaces.Tuples;
 import tags.Fact;
@@ -16,7 +15,7 @@ import tags.Tag;
 /**
  * Implementation of the ES.
  */
-class ExpertSystemImpl implements ExpertSystem, Thinking {
+class ExpertSystemImpl implements ExpertSystem{
     private final Thinker thinker;
     private final Teacher teacher;
     private final Rester rester;
@@ -44,8 +43,8 @@ class ExpertSystemImpl implements ExpertSystem, Thinking {
         this.teacher = teacherFactory.create(readyRules);
         this.rester = resterFactory.create(readyRules);
     }
-
-    @Override
+   
+	@Override
     public Set<Recommendation> think() {
         return thinker.think(false, Integer.MAX_VALUE);
     }
@@ -150,6 +149,7 @@ class ExpertSystemImpl implements ExpertSystem, Thinking {
     }
 
     public Tuples think(int iterate, Tuples tuples) {
+    	System.out.println("In the Expert System");
     	for(Object t: tuples) {
     		Fact f = new Fact(((Tuple) t).getSParams()[0]);
         	addTag(f);

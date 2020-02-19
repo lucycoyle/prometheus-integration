@@ -13,7 +13,7 @@ class LambdaSearcher extends Searcher<Set<Tag>> {
     private final BackwardSearcher backwardSearcher;
 
     @Inject
-    LambdaSearcher(
+	LambdaSearcher(
             @Assisted final ForwardSearcher forwardSearcher,
             @Assisted final BackwardSearcher backwardSearcher) {
         this.forwardSearcher = forwardSearcher;

@@ -1,6 +1,12 @@
+package text_simulator;
 //robot with the AI
 
-import java.util.concurrent.TimeUnit;
+import com.google.inject.Guice;
+
+import interfaces.Tuples;
+import prometheus.api.Prometheus;
+import prometheus.guice.PrometheusModule;
+
 
 public class Drone {
 	public PerceptronMatrix perceptronMatrix;
@@ -12,6 +18,7 @@ public class Drone {
 	private Basic_Sensor[] sensors;
 	private Action[] actions;
 	private boolean mistake;
+	private Prometheus prometheus;
 
 	
 	public Drone(String name, Action[] actions, Basic_Sensor[] sensors, GridWorld world, int x, int y, int direction, boolean mistake) {
@@ -30,6 +37,7 @@ public class Drone {
 		drone.setDirection(direction);
 		//this.world.addRobot(xCoord, yCoord, drone);
 		this.perceptronMatrix = new PerceptronMatrix(this.sensors, this.actions);
+		this.prometheus = Guice.createInjector(new PrometheusModule()).getInstance(Prometheus.class);
 		
 	}
 
@@ -167,9 +175,13 @@ public class Drone {
 			inputs[i] = sensor.score(world, visible);
 			i++;
 		}
-		this.perceptronMatrix.setInputs(inputs);
+//TODO: Connect sensor input to nn
+		
+		Tuples t = new Tuples();
+		t = prometheus.think(t);
+		
 		try {
-			Action decision = this.perceptronMatrix.makeDecision();
+			Action decision = convertToDecision(t);
 			takeAction(decision);
 		}
 		catch(indecisiveException e) {
@@ -177,6 +189,10 @@ public class Drone {
 		}
 	}
 	
+	private Action convertToDecision(Tuples t) throws indecisiveException{
+// TODO: Implement conversion
+		return null;
+	}
 	
 	//takes an action and updates drone's position and orientation
 	private void takeAction(Action action) {

@@ -19,7 +19,7 @@ class DirectSearcher {
     private final TreeSet<KnowledgeNode> ageSortedKNs;
 
     @Inject
-    DirectSearcher(
+	DirectSearcher(
             @Assisted("mapKN") final Map<Tag, KnowledgeNode> mapKN,
             @Assisted("activeTags") final Set<Tag> activeTags,
             @Assisted("ageSortedKNs")

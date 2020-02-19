@@ -18,7 +18,7 @@ class Thinker {
     private final Set<Fact> facts;
 
     @Inject
-    Thinker(
+	Thinker(
             @Assisted("readyRules") final Set<Rule> readyRules,
             @Assisted("activeRules") final Set<Rule> activeRules,
             @Assisted("facts") final Set<Fact> facts,

@@ -13,7 +13,7 @@ class Rester {
     private final RuleMerger ruleMerger;
 
     @Inject
-    Rester(
+	Rester(
             @Assisted("readyRules") final Set<Rule> readyRules,
             final RuleMerger ruleMerger) {
         this.readyRules = readyRules;

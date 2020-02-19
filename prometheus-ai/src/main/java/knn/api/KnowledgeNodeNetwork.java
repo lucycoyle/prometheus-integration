@@ -2,12 +2,14 @@ package knn.api;
 
 import java.util.List;
 import java.util.Set;
+
+import interfaces.Thinking;
 import tags.Tag;
 
 /**
  * The Knowledge Node Network (KNN).
  */
-public interface KnowledgeNodeNetwork {
+public interface KnowledgeNodeNetwork extends Thinking{
 
     /**
      * Resets the KNN by clearing all data structures.

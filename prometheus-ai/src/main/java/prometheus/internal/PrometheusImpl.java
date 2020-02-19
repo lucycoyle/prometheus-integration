@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.TreeSet;
 import es.api.ExpertSystem;
 import es.api.ExpertSystemFactory;
+import interfaces.Tuples;
 import knn.api.KnowledgeNodeNetwork;
 import knn.api.KnowledgeNodeNetworkFactory;
 import meta.api.MetaReasoner;
@@ -57,5 +58,12 @@ class PrometheusImpl implements Prometheus {
     @Override
     public MetaReasoner getMetaReasoner() {
         return meta;
+    }
+    
+    public Tuples think(Tuples t) {
+    	t = nn.think(0, t);
+    	t = knn.think(0, t);
+    	t = es.think(0, t);
+    	return t;
     }
 }
