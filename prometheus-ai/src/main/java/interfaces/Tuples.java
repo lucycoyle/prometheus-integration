@@ -49,6 +49,7 @@ public class Tuples implements Iterable {
 		public Tuple next() {
 
 			Tuple thisTuple = tupleList.get(ind);
+			ind++;
 			return thisTuple;
 
 		}
