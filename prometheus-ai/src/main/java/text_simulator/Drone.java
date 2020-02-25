@@ -168,16 +168,22 @@ public class Drone {
 	//matrix then makes a decision and outputs an action for the drone, which
 	//the drone takes. If the drone is indecisive, will throw an exception
 	public void makeDecision() throws indecisiveException {
-		int i = 0;
-		double[] inputs = new double[this.sensors.length];
-		for(Basic_Sensor sensor : this.sensors) {
-			int[][] visible = getVisible(sensor);
-			inputs[i] = sensor.score(world, visible);
-			i++;
-		}
-//TODO: Connect sensor input to nn
 		
 		Tuples t = new Tuples();
+		
+		
+		int i = 0;
+		int[] inputs = new int[this.sensors.length];
+		String[] labels= new String[this.sensors.length];
+		for(Basic_Sensor sensor : this.sensors) {
+			int[][] visible = getVisible(sensor);
+			inputs[i] = (int)sensor.score(world, visible);
+			labels[i]=sensor.getX().toString()+","+sensor.getY();
+			i++;
+		}
+
+		
+		t.add("Sensors score",labels,inputs);
 		t = prometheus.think(t);
 		
 		try {
