@@ -27,7 +27,7 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     }
     
     public Tuples think(int iterate, Tuples tuples) {
-    	System.out.println("In the Neural Network");
+    	/*System.out.println("In the Neural Network");
     	double[] data = new double[2];		
     	int[] output = new int[2];
     	Tuples tnnOutput = new Tuples();
@@ -43,7 +43,8 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     		output[1] = (int) (nnOutput * 100);
     		tnnOutput.add(name, labels, output);
     	}
-    	return tnnOutput;				
+    	return tnnOutput;	*/
+    	return tuples;
     }
     
 }
