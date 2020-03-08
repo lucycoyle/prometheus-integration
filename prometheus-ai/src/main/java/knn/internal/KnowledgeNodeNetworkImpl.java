@@ -182,8 +182,7 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork{
                 final String[] info = line.split(";\\s+");
                 final KnowledgeNode kn = new KnowledgeNode(info);
                 knowledgeNodes.add(kn);
-               // System.out.println("info");
-                //System.out.println(info[0]);
+ 
             }
            
             br.close();
@@ -204,28 +203,7 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork{
     @Override
     public void save(final String dbFilename) {
     }
-/**
-    public void processInputTuple(Tuple x) {
-    	String [] info = new String [1];
-    	String thisTag= "Object(";
-    	for (int i=0;i<x.getIParams().length;i++) {
-    		thisTag+= x.getSParams()[i]+"="+x.getIParams()[i]+",";
-    		System.out.println(x.getLabel());
-    	}
-    	thisTag+=")";
-    	info[0]=thisTag;
-    	KnowledgeNode kn= null;
-		try {
-			kn = new KnowledgeNode(info);
-		} catch (KnowledgeNodeParseException e) {
-			
-			e.printStackTrace();
-			System.out.println(e);
-		}
-    	addKnowledgeNode(kn);
-    	System.out.println(kn);
-    	
-    } */
+
     
     public void processInputTuple(Tuple x) {
     	String [] info = new String [1];
@@ -260,8 +238,7 @@ public Tuples think(int iterate, Tuples tuples) {
     	//Set<Tag> knOutputTags = lambdaThink(5);		//0 for ply		
     forwardThink(0);
     Set<Tag> knOutputTags = getActiveTags();
-    	System.out.println("knOutputTags:");
-    	System.out.println(knOutputTags);
+ 
     	Tuples knOutput= new Tuples();
         int i=0;
     	for(Tag t: knOutputTags) {
@@ -270,14 +247,13 @@ public Tuples think(int iterate, Tuples tuples) {
     		int[] iparams= {}; //paired?
     		if(t instanceof Fact) {
     		knOutput.add("Fact",sparams,iparams);
-    		System.out.println("found a fact");}
+    	}
     		else if (t instanceof Rule) {
     		knOutput.add("Rule",sparams,iparams);
-    		System.out.println("found rule");
-    		System.out.println(sparams[0]);
+   
     		}
     		else {
-    			System.out.println("neither rule or fact");
+    			
     		}
     		
     		i++;
