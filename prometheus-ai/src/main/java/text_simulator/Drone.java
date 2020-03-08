@@ -1,8 +1,7 @@
 package text_simulator;
 //robot with the AI
 
-import com.google.inject.Guice;
-
+import com.google.inject.*;
 import interfaces.Tuples;
 import prometheus.api.Prometheus;
 import prometheus.guice.PrometheusModule;
@@ -185,6 +184,7 @@ public class Drone {
 		
 		t.add("Sensors score",labels,inputs);
 		t = prometheus.think(t);
+		//System.out.println(t);
 		
 		try {
 			Action decision = convertToDecision(t);

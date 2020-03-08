@@ -20,6 +20,8 @@ import interfaces.Tuples;
 import knn.api.KnowledgeNode;
 import knn.api.KnowledgeNodeNetwork;
 import knn.api.KnowledgeNodeParseException;
+import tags.Fact;
+import tags.Rule;
 import tags.Tag;
 
 /**
@@ -162,6 +164,8 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork{
 
     @Override
     public Set<Tag> lambdaThink(final int ply) {
+    	System.out.println("activeTags:");
+    	System.out.println(activeTags);
         return lambdaSearcher.search(activeTags, ply);
     }
 
@@ -178,7 +182,10 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork{
                 final String[] info = line.split(";\\s+");
                 final KnowledgeNode kn = new KnowledgeNode(info);
                 knowledgeNodes.add(kn);
+               // System.out.println("info");
+                //System.out.println(info[0]);
             }
+           
             br.close();
         } catch (final Exception e) {
             e.printStackTrace();
@@ -197,13 +204,13 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork{
     @Override
     public void save(final String dbFilename) {
     }
-
+/**
     public void processInputTuple(Tuple x) {
     	String [] info = new String [1];
     	String thisTag= "Object(";
     	for (int i=0;i<x.getIParams().length;i++) {
     		thisTag+= x.getSParams()[i]+"="+x.getIParams()[i]+",";
-    		
+    		System.out.println(x.getLabel());
     	}
     	thisTag+=")";
     	info[0]=thisTag;
@@ -213,26 +220,66 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork{
 		} catch (KnowledgeNodeParseException e) {
 			
 			e.printStackTrace();
+			System.out.println(e);
 		}
     	addKnowledgeNode(kn);
+    	System.out.println(kn);
     	
+    } */
+    
+    public void processInputTuple(Tuple x) {
+    	String [] info = new String [1];
+    	String thisTag= "Object(";
+    	for (int i=0;i<x.getIParams().length;i++) {
+    		thisTag+= x.getSParams()[i]+"="+x.getIParams()[i]+",";
+    		System.out.println(x.getLabel());
+    	}
+    	thisTag+=")";
+    	info[0]=thisTag;
+    	Fact fact = new Fact(info[0]);
+
+        addActiveTags(fact);
+    	
+    }
+    
+    public void testInputs() {
+    	 Fact fact1 = new Fact("dog(wolflike,length>50,weight>20)");
+         Fact fact2 = new Fact("cat(feline,length>50,weight>20)");
+
+         addActiveTags(fact1, fact2);
     }
 public Tuples think(int iterate, Tuples tuples) {
 	System.out.println("In the Knowledge Node Network");
+	loadData("data/animalData.txt");
     Iterator<Tuple> iter= tuples.iterator();
     while(iter.hasNext()) {
     	Tuple t= iter.next();
-    	processInputTuple(t);
+    	//processInputTuple(t);
     }
-    
-    	Set<Tag> knOutputTags = lambdaThink(0);		//0 for ply		
+    testInputs();
+    	//Set<Tag> knOutputTags = lambdaThink(5);		//0 for ply		
+    forwardThink(0);
+    Set<Tag> knOutputTags = getActiveTags();
+    	System.out.println("knOutputTags:");
+    	System.out.println(knOutputTags);
     	Tuples knOutput= new Tuples();
-    	int i=0;
+        int i=0;
     	for(Tag t: knOutputTags) {
-    		Tuple newTuple= new Tuple();
+    		//Tuple newTuple= new Tuple();
     		String[] sparams= {t.toString()};
     		int[] iparams= {}; //paired?
+    		if(t instanceof Fact) {
     		knOutput.add("Fact",sparams,iparams);
+    		System.out.println("found a fact");}
+    		else if (t instanceof Rule) {
+    		knOutput.add("Rule",sparams,iparams);
+    		System.out.println("found rule");
+    		System.out.println(sparams[0]);
+    		}
+    		else {
+    			System.out.println("neither rule or fact");
+    		}
+    		
     		i++;
     	}
     	return knOutput;					

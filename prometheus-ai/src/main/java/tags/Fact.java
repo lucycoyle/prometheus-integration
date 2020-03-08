@@ -29,13 +29,28 @@ public final class Fact extends Predicate {
      */
 
     public Fact(final String value, final double confidenceValue) {
-
+    //	if(value.contains(")")) {
+    		System.out.println("found bracket");
+    	
         final String[] tokens = value.split("[(),]");
 
         this.setPredicateName(tokens[0]);
+       
         this.setArguments(argStringParser(tokens));
         this.setConfidence(confidenceValue);
-    }
+   /* 	}
+    	else {
+    		System.out.println("no bracket");
+    		System.out.println("found bracket");
+        	
+            final String[] tokens = value.split("[\\[\\],]");
+
+            this.setPredicateName(tokens[0]);
+           
+            this.setArguments(argStringParser(tokens));
+            this.setConfidence(confidenceValue);
+   	} */
+    	}
 
     /**
      * {@code confidenceValue} defaults to 1.0.

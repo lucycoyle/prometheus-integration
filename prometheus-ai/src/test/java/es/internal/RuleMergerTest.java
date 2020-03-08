@@ -10,7 +10,7 @@ import tags.Predicate;
 import tags.Rule;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
+//import static org.testng.Assert.assertNotEquals;
 
 
 public class RuleMergerTest {
@@ -79,7 +79,7 @@ public class RuleMergerTest {
         final Optional<Rule> actual = ruleMerger.makeMergedRule(rules);
 
         // then
-        assertNotEquals(actual, Optional.empty());
+     //   assertNotEquals(actual, Optional.empty());
         assertEquals(actual.get().getInputFacts(), facts1);
         assertEquals(actual.get().getOutputPredicates(), predicates2);
     }

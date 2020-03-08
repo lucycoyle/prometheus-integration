@@ -43,6 +43,7 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     		output[1] = (int) (nnOutput * 100);
     		tnnOutput.add(name, labels, output);
     	}
+    	System.out.println(tnnOutput);
     	return tnnOutput;				
     }
     
