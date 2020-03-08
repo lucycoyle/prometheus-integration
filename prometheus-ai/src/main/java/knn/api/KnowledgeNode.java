@@ -60,8 +60,6 @@ public final class KnowledgeNode implements Comparable<KnowledgeNode> {
         if (data[0].charAt(0) == '@') {
             this.inputTag = new Recommendation(data[0]);
         } else if (data[0].contains("->")) {
-            System.out.println("instantiating kn, calling new Rule()");
-            System.out.println(data[0]);
             this.inputTag = new Rule(data[0]);
         } else if (data[0].matches(".*\\(.*\\).*")) {
             this.inputTag = new Fact(data[0]);

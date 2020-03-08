@@ -1,7 +1,11 @@
 package text_simulator;
 //robot with the AI
 
+import java.util.Iterator;
+
 import com.google.inject.*;
+
+import interfaces.Tuple;
 import interfaces.Tuples;
 import prometheus.api.Prometheus;
 import prometheus.guice.PrometheusModule;
@@ -184,7 +188,12 @@ public class Drone {
 		
 		t.add("Sensors score",labels,inputs);
 		t = prometheus.think(t);
-		//System.out.println(t);
+		System.out.println("prometheus think output:");
+		
+		Iterator<Tuple> iter= t.iterator();
+ 	   while(iter.hasNext()) {
+ 		Tuple tuple= iter.next();
+		System.out.println(tuple.getLabel());}
 		
 		try {
 			Action decision = convertToDecision(t);
