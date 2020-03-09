@@ -205,13 +205,31 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork{
     }
 
     
-    public void processInputTuple(Tuple x) {
+/*    public void processInputTuple(Tuple x) {
     	String [] info = new String [1];
     	String thisTag= "Object(";
     	for (int i=0;i<x.getIParams().length;i++) {
     		thisTag+= x.getSParams()[i]+"="+x.getIParams()[i]+",";
     		System.out.println(x.getLabel());
     	}
+    	thisTag+=")";
+    	info[0]=thisTag;
+    	Fact fact = new Fact(info[0]);
+
+        addActiveTags(fact);
+    	
+    } */
+    
+    
+    public void processInputTuple(Tuple x) {
+    	String [] info = new String [1];
+    	
+    	
+    	String thisTag= x.getLabel();
+ 
+    		thisTag+= x.getIParams()[0];
+    	
+    	
     	thisTag+=")";
     	info[0]=thisTag;
     	Fact fact = new Fact(info[0]);
@@ -232,9 +250,9 @@ public Tuples think(int iterate, Tuples tuples) {
     Iterator<Tuple> iter= tuples.iterator();
     while(iter.hasNext()) {
     	Tuple t= iter.next();
-    	//processInputTuple(t);
+    	processInputTuple(t);
     }
-    testInputs();
+   // testInputs();
     	//Set<Tag> knOutputTags = lambdaThink(5);		//0 for ply		
     forwardThink(0);
     Set<Tag> knOutputTags = getActiveTags();
