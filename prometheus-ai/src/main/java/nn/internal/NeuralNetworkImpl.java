@@ -55,7 +55,8 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     	tnnOutput.add("charge",labels2,output2);
  
     	
-    	return tnnOutput;				
+    //	return tnnOutput;	
+    	return tuples;
     }
     
 }

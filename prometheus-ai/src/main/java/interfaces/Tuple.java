@@ -1,6 +1,8 @@
 package interfaces;
 
-import scala.actors.threadpool.Arrays;
+import java.util.Arrays;
+
+//import scala.actors.threadpool.Arrays;
 
 public class Tuple {
 
