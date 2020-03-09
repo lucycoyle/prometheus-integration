@@ -214,7 +214,8 @@ public class Drone {
 		Iterator<Tuple> iter= t.iterator();
  	   while(iter.hasNext()) {
  		Tuple tuple= iter.next();
-		System.out.println(tuple.getLabel());}
+		System.out.println(tuple.getLabel());
+		}
 		
 		try {
 			Action decision = convertToDecision(t);
@@ -229,7 +230,22 @@ public class Drone {
 	}
 	
 	private Action convertToDecision(Tuples t) throws indecisiveException{
-// TODO: Implement conversion
+		Iterator<Tuple> iter= t.iterator();
+		while(iter.hasNext()) {
+	 		Tuple tuple= iter.next();
+	 		if(tuple.getLabel().equals("@move[right]")) {
+	 			return this.actions[4];
+	 		}
+	 		else if(tuple.getLabel().equals("@move[left]")) {
+	 			return this.actions[3];
+	 		}
+	 		else if(tuple.getLabel().equals("@move[front]")) {
+	 			return this.actions[1];
+	 		}
+	 		else if(tuple.getLabel().equals("@move[back]")) {
+	 			return this.actions[6];
+	 		}
+		}
 		return null;
 	}
 	
