@@ -1,0 +1,7 @@
+charge(probability>50); 100
+charge(probability>50); 100; charge(probability>50) -> @charge(willDie); 100
+frontSensor(probability>50); 100; leftSensor(probability>50); 100; rightSensor(probability>50); 100; backSensor(probability>50); 60
+frontSensor(probability>50); 100; backSensor(probability>50); 100; frontSensor(probability>50) backSensor(probability>50) -> @move(right); 100
+backSensor(probability>50); 100; leftSensor(probability>50); 100; backSensor(probability>50) leftSensor(probability>50) -> @move(front); 100
+backSensor(probability>50); 100; rightSensor(probability>50); 100; backSensor(probability>50) leftSensor(probability>50) -> @move(left); 100
+charge(probability>50) -> @charge(willDie); 100

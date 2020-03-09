@@ -29,25 +29,32 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     public Tuples think(int iterate, Tuples tuples) {
     	System.out.println("In the Neural Network");
     	double[] data = new double[1];		
-    	int[] output = new int[1];
+  
+    	
+    	int[] output2 = new int[1];
+    	String[] labels2 = new String[1];
     	Tuples tnnOutput = new Tuples();
-    	String[] labels = new String[2];
+    	labels2[0]="testlabel";
+    	output2[0]=36;
     	//toCharge?
     	//proximity
-    	String[] proximitysensors= {"front sensor","right sensor","left sensor","back sensor"};
+    	String[] proximitysensors= {"frontSensor","rightSensor","leftSensor","backSensor"};
     	for(int i = 0; i < 4; i++) {
-
+    		int[] output = new int[1];
+        	
+        	String[] labels = new String[1];
     		double nnOutput = nn(data, i);	
     		String name = proximitysensors[i];
     		labels[0] = "probability";
+    		output[0] = 50+i;
     	
-    		output[0] = 50;
-
     		tnnOutput.add(name, labels, output);
+    	
     	}
     
-    	tnnOutput.add("Charge",labels,output);
-    	System.out.println(tnnOutput);
+    	tnnOutput.add("charge",labels2,output2);
+ 
+    	
     	return tnnOutput;				
     }
     
