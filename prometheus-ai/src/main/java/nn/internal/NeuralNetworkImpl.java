@@ -34,8 +34,8 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     	int[] output2 = new int[1];
     	String[] labels2 = new String[1];
     	Tuples tnnOutput = new Tuples();
-    	labels2[0]="testlabel";
-    	output2[0]=36;
+    	labels2[0]="probability";
+    	output2[0]=56;
     	//toCharge?
     	//proximity
     	String[] proximitysensors= {"frontSensor","rightSensor","leftSensor","backSensor"};

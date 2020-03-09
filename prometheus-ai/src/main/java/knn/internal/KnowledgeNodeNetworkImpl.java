@@ -156,8 +156,7 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 
 	@Override
 	public Set<Tag> lambdaThink(final int ply) {
-		System.out.println("activeTags:");
-		System.out.println(activeTags);
+
 		return lambdaSearcher.search(activeTags, ply);
 	}
 
@@ -245,9 +244,12 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 		}
 		// testInputs();
 		// Set<Tag> knOutputTags = lambdaThink(5); //0 for ply
+		System.out.println("activeTags before knn search:");
 		System.out.println(getActiveTags());
 		forwardThink(0);
 		Set<Tag> knOutputTags = getActiveTags();
+		System.out.println("activeTags after knn search:");
+	
 		System.out.println(knOutputTags);
 		Tuples knOutput = new Tuples();
 		int i = 0;
