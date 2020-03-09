@@ -212,16 +212,16 @@ public class Drone {
 		Iterator<Tuple> iter= t.iterator();
 		while(iter.hasNext()) {
 	 		Tuple tuple= iter.next();
-	 		if(tuple.getLabel().equals("@move(right)")) {
+	 		if(tuple.getLabel().equals("@move[right]")) {
 	 			return this.actions[4];
 	 		}
-	 		else if(tuple.getLabel().equals("@move(left)")) {
+	 		else if(tuple.getLabel().equals("@move[left]")) {
 	 			return this.actions[3];
 	 		}
-	 		else if(tuple.getLabel().equals("@move(front)")) {
+	 		else if(tuple.getLabel().equals("@move[front]")) {
 	 			return this.actions[1];
 	 		}
-	 		else if(tuple.getLabel().equals("@move(back)")) {
+	 		else if(tuple.getLabel().equals("@move[back]")) {
 	 			return this.actions[6];
 	 		}
 		}
