@@ -200,13 +200,10 @@ public class Drone {
 			labels[0]="probability";
 			
 			i++;
-			System.out.println(name);
-			System.out.println(labels[0]);
-			System.out.println(inputs[0]);
 			t.add(name,labels,inputs);
 		}
 
-		System.out.println(t.toSString());
+	
 		
 		t = prometheus.think(t);
 		System.out.println("prometheus think output:");

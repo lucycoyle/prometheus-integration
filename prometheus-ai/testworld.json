@@ -8,11 +8,12 @@
 				{"objType": "bird", "objName": "obj3", "objX": 8, "objY": 3, "xTransl": 3, "yTransl": 1},
 				{"objType": "grasshopper", "objName": "obj5", "objX": 5, "objY": 17, "xTransl": 3, "yTransl": 1},
 				{"objType": "grass", "objName": "obj4", "objX": 14, "objY": 4, "xTransl": 3, "yTransl": 7}
+				{"objType": "grass", "objName": "obj6", "objX": 1, "objY": 10, "xTransl": 3, "yTransl": 3}
 		]
 		"robots":[
 				{"robName": "rob1", "AI": "percep1", "robX": 18, "robY": 18},
 				{"robName": "rob2", "AI": "percep2", "robX": 1, "robY": 7},
-				{"robName": "rob3", "AI": "percep3", "robX": 9, "robY": 1},
+				{"robName": "rob3", "AI": "percep3", "robX": 9, "robY": 3},
 				{"robName": "rob4", "AI": "percep4", "robX": 9, "robY": 7},
 		]
 	}

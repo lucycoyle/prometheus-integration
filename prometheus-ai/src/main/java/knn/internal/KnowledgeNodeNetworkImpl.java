@@ -213,9 +213,13 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 	
 
 		String thisTag = x.getLabel() + '(';
-		thisTag += x.getSParams()[0] + "=";
-		thisTag += x.getIParams()[0];
-
+		thisTag += x.getSParams()[0] + ">";
+		if(x.getIParams()[0]>50) {
+		thisTag += "=50";}
+		else {
+			thisTag += "=0";
+		}
+		
 		thisTag += ")";
 		info[0] = thisTag;
 		Fact fact = new Fact(info[0]);
@@ -250,6 +254,7 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 		Set<Tag> knOutputTags = getActiveTags();
 		System.out.println("activeTags after knn search:");
 	
+
 		System.out.println(knOutputTags);
 		Tuples knOutput = new Tuples();
 		int i = 0;
