@@ -196,7 +196,7 @@ class ExpertSystemImpl implements ExpertSystem{
     	for(Recommendation r: recommendations) {
     		addRecommendation(r);
     	} 
-    	recommendations = getRecommendations();
+    	//recommendations = getRecommendations();
     	System.out.println("recommendations:");
     	System.out.println(recommendations);
     	Tuples recTuples = new Tuples();

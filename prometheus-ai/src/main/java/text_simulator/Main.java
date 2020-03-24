@@ -48,11 +48,11 @@ public class Main {
 		
 		long w = (long) worldObject.get("width"); 						//reading the dimensions of the grid world 
 		Integer width = (int) (long) w;
-		System.out.println(width);
+		//System.out.println(width);
 		
 		long h = (long) worldObject.get("height");
 		Integer height = (int) (long) h;
-		System.out.println(height);
+		//System.out.println(height);
 		
 		GridWorld gWorld = new GridWorld(width, height);
 		
@@ -61,9 +61,9 @@ public class Main {
 		Iterator objItr = worldObjArray.iterator();
 		while (objItr.hasNext()) {
 			JSONObject innerObj = (JSONObject) objItr.next();
-			System.out.println(innerObj.get("objType")+ " " + innerObj.get("objName") + " "+innerObj.get("objX") + " " 
-					+ innerObj.get("objY")+" " + innerObj.get("xTransl") + " " + innerObj.get("yTransl"));
-			
+//			System.out.println(innerObj.get("objType")+ " " + innerObj.get("objName") + " "+innerObj.get("objX") + " " 
+//					+ innerObj.get("objY")+" " + innerObj.get("xTransl") + " " + innerObj.get("yTransl"));
+//			
 			String type = (String) innerObj.get("objType");
 			String name = (String) innerObj.get("objName");
 			
@@ -121,9 +121,9 @@ public class Main {
 		Action rr = new Action("rr",0,0,.25);
 		Action[] actions = {fl,f,fr,l,r,bl,b,br,rl,rr};
 
-		Basic_Sensor fl_Im = new Basic_Sensor(new ImmovableObj(),-1,1);
-		Basic_Sensor f_Im = new Basic_Sensor(new ImmovableObj(), 0,1);
-		Basic_Sensor fr_Im = new Basic_Sensor(new ImmovableObj(), 1,1);
+		Basic_Sensor fl_Im = new Basic_Sensor(new ImmovableObj(),-1, 0);
+		Basic_Sensor f_Im = new Basic_Sensor(new ImmovableObj(), 0, 1);
+		Basic_Sensor fr_Im = new Basic_Sensor(new ImmovableObj(), 1,0);
 
 		Basic_Sensor[] sensors = {fl_Im,f_Im,fr_Im};
 		double[][] data = {	//training data
@@ -154,8 +154,8 @@ public class Main {
 		};
 		while (robItr.hasNext()) {
 			JSONObject innerRob = (JSONObject) robItr.next();
-			System.out.println(innerRob.get("robName")+ " " + innerRob.get("AI") + " "+innerRob.get("robX") + " " 
-					+ innerRob.get("robY"));
+//			System.out.println(innerRob.get("robName")+ " " + innerRob.get("AI") + " "+innerRob.get("robX") + " " 
+//					+ innerRob.get("robY"));
 			
 			String name = (String) innerRob.get("robName");
 			String ai = (String) innerRob.get("AI");
@@ -200,9 +200,9 @@ public class Main {
 				try {
 					int l = 0;
 					for(MovableObj movObj : movList) {
-						System.out.println("Inside movables");
+					//	System.out.println("Inside movables");
 						if (movObj.getType().equals("bird")) {
-							System.out.println("Inside bird");
+							//System.out.println("Inside bird");
 							//bird moves east or west
 							int x = movObj.getX();
 							int y = movObj.getY();
