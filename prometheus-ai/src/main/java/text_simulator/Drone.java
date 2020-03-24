@@ -174,11 +174,7 @@ public class Drone {
 		
 		Tuples t = new Tuples();
 		
-		
 		int i = 0;
-	//	int[] inputs = new int[this.sensors.length];
-	//	String[] labels= new String[this.sensors.length];
-	//fl,f,fr
 		for(Basic_Sensor sensor : this.sensors) {
 			String name= "";
 			if (i==0) {
@@ -192,26 +188,21 @@ public class Drone {
 			}
 			int[][] visible = getVisible(sensor);
 			
-			int [] inputs = new int[1];
+			int[] inputs = new int[1];
 			String [] labels = new String[1];
 			inputs[0]=	(int)sensor.score(world, visible);
-			
-			//labels[i]=sensor.getX().toString()+","+sensor.getY();
 			labels[0]="probability";
-			
+			System.out.println(name + ": " + inputs[0]);
 			i++;
 			t.add(name,labels,inputs);
 		}
-
-	
 		
 		t = prometheus.think(t);
-		System.out.println("prometheus think output:");
 		
 		Iterator<Tuple> iter= t.iterator();
- 	   while(iter.hasNext()) {
- 		Tuple tuple= iter.next();
-		System.out.println(tuple.getLabel());
+ 	   	while(iter.hasNext()) {
+ 	   		Tuple tuple= iter.next();
+ 	   		System.out.println(tuple.getLabel());
 		}
 		
 		try {

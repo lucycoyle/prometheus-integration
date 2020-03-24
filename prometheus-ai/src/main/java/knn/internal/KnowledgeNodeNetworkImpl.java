@@ -214,8 +214,8 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 
 		String thisTag = x.getLabel() + '(';
 		thisTag += x.getSParams()[0] + ">";
-		if(x.getIParams()[0]>50) {
-		thisTag += "=50";}
+		if(x.getIParams()[0] <= 0) {
+		thisTag += "=100";}
 		else {
 			thisTag += "=0";
 		}
