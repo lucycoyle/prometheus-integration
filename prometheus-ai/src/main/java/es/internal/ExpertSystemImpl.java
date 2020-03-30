@@ -192,7 +192,7 @@ class ExpertSystemImpl implements ExpertSystem{
     	
     	 
     	   
-    	Set<Recommendation> recommendations = think();
+    	Set<Recommendation> recommendations = think(); //diff than prometheus think
     	for(Recommendation r: recommendations) {
     		addRecommendation(r);
     	} 
