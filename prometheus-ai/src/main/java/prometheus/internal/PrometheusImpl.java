@@ -9,6 +9,8 @@ import es.api.ExpertSystemFactory;
 import interfaces.Tuples;
 import knn.api.KnowledgeNodeNetwork;
 import knn.api.KnowledgeNodeNetworkFactory;
+import meta.api.MetaReasoner;
+import meta.api.MetaReasonerFactory;
 //import meta.api.MetaReasoner;
 //import meta.api.MetaReasonerFactory;
 import nn.api.NeuralNetwork;
@@ -22,13 +24,14 @@ class PrometheusImpl implements Prometheus {
     private final NeuralNetwork nn;
     private final KnowledgeNodeNetwork knn;
     private final ExpertSystem es;
-  //  private final MetaReasoner meta;
+    private final MetaReasoner meta;
 
     @Inject
     PrometheusImpl(
             final NeuralNetworkFactory neuralNetworkFactory,
             final ExpertSystemFactory expertSystemFactory,
-            final KnowledgeNodeNetworkFactory knowledgeNodeNetworkFactory) {
+            final KnowledgeNodeNetworkFactory knowledgeNodeNetworkFactory,
+            final MetaReasonerFactory metaReasonerFactory) {
         this.nn = neuralNetworkFactory.create();
         this.es = expertSystemFactory
                 .create(new HashSet<>(), new HashSet<>(), new HashSet<>(),
@@ -36,7 +39,7 @@ class PrometheusImpl implements Prometheus {
         this.knn = knowledgeNodeNetworkFactory.create(
                 new HashMap<>(), new HashSet<>(), new TreeSet<>(), 1,
                 Long.MAX_VALUE);
-        //this.meta = metaReasonerFactory.create();
+        this.meta = metaReasonerFactory.create();
     }
 
     @Override
@@ -55,14 +58,15 @@ class PrometheusImpl implements Prometheus {
     }
 
     @Override
-  /*  public MetaReasoner getMetaReasoner() {
+    public MetaReasoner getMetaReasoner() {
         return meta;
     }
-    */
+  
     public Tuples think(Tuples t) {
     	t = nn.think(0, t);
     	t = knn.think(0, t);
     	t = es.think(0, t);
+    	t = meta.think(0, t);
     	return t;
     }
 }
