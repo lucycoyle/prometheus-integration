@@ -1,9 +1,9 @@
 package text_simulator;
+
 import java.awt.*;// Basic java graphics library
 import javax.swing.*;
-import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Random;
+
 public class GridWorld{
 	
 	private ImmovableObj[][] immovableArray;	//array of immovable objects, xy coordinates

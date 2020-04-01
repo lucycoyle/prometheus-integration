@@ -10,7 +10,6 @@ import nn.api.NeuralNetwork;
  * Implementation of the NN.
  */
 class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
-	int numSensors = 5;
 	
 	@Inject
     NeuralNetworkImpl() {
@@ -22,16 +21,9 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     	}
     }
     
-    public double nn(double[] data, int sensorId) {
-    	return 0.9;
-    }
-    
     public Tuples think(int iterate, Tuples tuples) {
     	System.out.println("In the Neural Network");
- 
-    	
     	return tuples;	
-    	//return tnnOutput;
     }
     
 }

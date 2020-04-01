@@ -19,7 +19,6 @@ import interfaces.Tuple;
 import interfaces.Tuples;
 import knn.api.KnowledgeNode;
 import knn.api.KnowledgeNodeNetwork;
-import knn.api.KnowledgeNodeParseException;
 import tags.Fact;
 import tags.Rule;
 import tags.Tag;
@@ -196,21 +195,8 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 	public void save(final String dbFilename) {
 	}
 
-	/*
-	 * public void processInputTuple(Tuple x) { String [] info = new String [1];
-	 * String thisTag= "Object("; for (int i=0;i<x.getIParams().length;i++) {
-	 * thisTag+= x.getSParams()[i]+"="+x.getIParams()[i]+",";
-	 * System.out.println(x.getLabel()); } thisTag+=")"; info[0]=thisTag; Fact fact
-	 * = new Fact(info[0]);
-	 * 
-	 * addActiveTags(fact);
-	 * 
-	 * }
-	 */
-
 	public void processInputTuple(Tuple x) {
 		String[] info = new String[1];
-	
 
 		String thisTag = x.getLabel() + '(';
 		thisTag += x.getSParams()[0];
@@ -225,20 +211,12 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 		Fact fact = new Fact(info[0]);
 
 		addActiveTags(fact);
-	
-
 	}
 
-	/*
-	 * public void testInputs() { Fact fact1 = new
-	 * Fact("dog(wolflike,length>50,weight>20)"); Fact fact2 = new
-	 * Fact("cat(feline,length>50,weight>20)");
-	 * 
-	 * addActiveTags(fact1, fact2); }
-	 */
 	public Tuples think(int iterate, Tuples tuples) {
 		System.out.println("In the Knowledge Node Network");
 		loadData("data/robotData.txt");
+		
 		Iterator<Tuple> iter = tuples.iterator();
 
 		while (iter.hasNext()) {
@@ -246,32 +224,27 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 
 			processInputTuple(t);
 		}
-		// testInputs();
-		// Set<Tag> knOutputTags = lambdaThink(5); //0 for ply
+		
 		System.out.println("activeTags before knn search:");
 		System.out.println(getActiveTags());
+		
 		forwardThink(0);
+		
 		Set<Tag> knOutputTags = getActiveTags();
 		System.out.println("activeTags after knn search:");
-	
-
 		System.out.println(knOutputTags);
+		
 		Tuples knOutput = new Tuples();
-		int i = 0;
+
 		for (Tag t : knOutputTags) {
-			// Tuple newTuple= new Tuple();
 			String[] sparams = { t.toString() };
-			int[] iparams = {}; // paired?
+			int[] iparams = {};
 			if (t instanceof Fact) {
 				knOutput.add("Fact", sparams, iparams);
-			} else if (t instanceof Rule) {
+			} 
+			else if (t instanceof Rule) {
 				knOutput.add("Rule", sparams, iparams);
-
-			} else {
-
 			}
-
-			i++;
 		}
 		return knOutput;
 	}

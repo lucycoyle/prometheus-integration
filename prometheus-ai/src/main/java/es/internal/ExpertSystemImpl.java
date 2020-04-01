@@ -9,7 +9,6 @@ import es.api.ExpertSystem;
 import interfaces.Tuple;
 import interfaces.Tuples;
 import tags.Fact;
-import tags.Predicate;
 import tags.Recommendation;
 import tags.Rule;
 import tags.Tag;
@@ -152,20 +151,17 @@ class ExpertSystemImpl implements ExpertSystem{
 
     public Tuples think(int iterate, Tuples tuples) {
     	System.out.println("In the Expert System");
-    	 Iterator<Tuple> iter= tuples.iterator();
-    	   while(iter.hasNext()) {
+    	Iterator<Tuple> iter= tuples.iterator();
+    	while(iter.hasNext()) {
     		Tuple t= iter.next();
     		if(t.getLabel()=="Fact") {
-   
-    			
     			String factString= t.getSParams()[0].replaceAll("\\[", "(");
     			factString= factString.replaceAll("\\]", ")");
     			factString= factString.replaceAll(" ", "");
-   
     			
-    		Fact f = new Fact( factString);
-  
-    		addFact(f);}
+    			Fact f = new Fact( factString);
+    			addFact(f);
+    		}
     		else if (t.getLabel()=="Rule") {
     
     			String[] tokens= t.getSParams()[0].split("->");
@@ -186,17 +182,16 @@ class ExpertSystemImpl implements ExpertSystem{
 
         		Rule r = new Rule( ruleString);
         		
-        		addReadyRule(r);}
+        		addReadyRule(r);
+        	}
         	
     	}
-    	
     	 
-    	   
-    	Set<Recommendation> recommendations = think(); //diff than prometheus think
+    	Set<Recommendation> recommendations = think(); //different than prometheus think
     	for(Recommendation r: recommendations) {
     		addRecommendation(r);
     	} 
-    	//recommendations = getRecommendations();
+    	
     	System.out.println("recommendations:");
     	System.out.println(recommendations);
     	Tuples recTuples = new Tuples();
