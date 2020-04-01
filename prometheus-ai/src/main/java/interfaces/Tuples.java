@@ -3,31 +3,30 @@ package interfaces;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Tuples implements Iterable {
+public class Tuples implements Iterable<Tuple> {
 
 	public ArrayList<Tuple> tupleList;
-
 
 	public Tuples(ArrayList<Tuple> input) {
 		this.tupleList = input;
 	}
+	
 	public Tuples() {
 		this.tupleList = new ArrayList<Tuple>();
 	}
 
 	public String toSString() {
 		String full = "";
-		for (int i=0;i<this.tupleList.size();i++) {
-			full+=tupleList.get(i).toString()+"-----";
+		for (int i = 0; i < this.tupleList.size(); i++) {
+			full += tupleList.get(i).toString() + "-----";
 		}
 		return full;
 	}
+	
 	public void add(String name, String[] labels, int[] data){
 		Tuple t = new Tuple();
 		t.setTuple(name, labels, data);
-		
 		tupleList.add(t);
-	
 	}
 
 	@Override
@@ -56,15 +55,11 @@ public class Tuples implements Iterable {
 		// moves the cursor/iterator to next element
 		@Override
 		public Tuple next() {
-
 			Tuple thisTuple = tupleList.get(ind);
 			ind++;
 			return thisTuple;
-
 		}
 		
-		
-
 		// Used to remove an element. Implemented only if needed
 		public void remove() {
 			// Default throws UnsupportedOperationException.

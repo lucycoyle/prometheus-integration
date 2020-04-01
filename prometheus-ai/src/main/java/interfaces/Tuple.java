@@ -2,8 +2,6 @@ package interfaces;
 
 import java.util.Arrays;
 
-//import scala.actors.threadpool.Arrays;
-
 public class Tuple {
 
 	final int minScore = -100;
@@ -21,15 +19,17 @@ public class Tuple {
 	public String getLabel() {
 		return this.label;
 	}
+	
 	public String[] getSParams() {
 		return this.sParams;
 	}
+	
 	public int[] getIParams() {
 		return this.iParams;
 	}
+	
 	@Override
 	public String toString() {
-		String s= this.getLabel()+Arrays.toString(this.getIParams())+Arrays.toString(this.getSParams());
-		return s;
+		return this.getLabel() + Arrays.toString(this.getIParams()) + Arrays.toString(this.getSParams());
 	}
 }

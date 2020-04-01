@@ -10,7 +10,6 @@ import interfaces.Tuples;
 import prometheus.api.Prometheus;
 import prometheus.guice.PrometheusModule;
 
-
 public class Drone {
 	public PerceptronMatrix perceptronMatrix;
 	private String name;
@@ -38,7 +37,6 @@ public class Drone {
 		Robot drone = new Robot(this.name, xCoord, yCoord, false);		//creating robot first and then adding AI later
 	
 		drone.setDirection(direction);
-		//this.world.addRobot(xCoord, yCoord, drone);
 		this.perceptronMatrix = new PerceptronMatrix(this.sensors, this.actions);
 		this.prometheus = Guice.createInjector(new PrometheusModule()).getInstance(Prometheus.class);
 		

@@ -1,17 +1,16 @@
 package text_simulator;
+
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
-//import java.io.*;
 import java.io.FileReader;
 import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-//import java.awt.*;                //graphics library
 
 public class Main {
 
@@ -48,11 +47,9 @@ public class Main {
 		
 		long w = (long) worldObject.get("width"); 						//reading the dimensions of the grid world 
 		Integer width = (int) (long) w;
-		//System.out.println(width);
 		
 		long h = (long) worldObject.get("height");
 		Integer height = (int) (long) h;
-		//System.out.println(height);
 		
 		GridWorld gWorld = new GridWorld(width, height);
 		
@@ -61,9 +58,7 @@ public class Main {
 		Iterator objItr = worldObjArray.iterator();
 		while (objItr.hasNext()) {
 			JSONObject innerObj = (JSONObject) objItr.next();
-//			System.out.println(innerObj.get("objType")+ " " + innerObj.get("objName") + " "+innerObj.get("objX") + " " 
-//					+ innerObj.get("objY")+" " + innerObj.get("xTransl") + " " + innerObj.get("yTransl"));
-//			
+
 			String type = (String) innerObj.get("objType");
 			String name = (String) innerObj.get("objName");
 			
@@ -154,8 +149,6 @@ public class Main {
 		};
 		while (robItr.hasNext()) {
 			JSONObject innerRob = (JSONObject) robItr.next();
-//			System.out.println(innerRob.get("robName")+ " " + innerRob.get("AI") + " "+innerRob.get("robX") + " " 
-//					+ innerRob.get("robY"));
 			
 			String name = (String) innerRob.get("robName");
 			String ai = (String) innerRob.get("AI");
@@ -166,15 +159,13 @@ public class Main {
 			long tmpY = (long) innerRob.get("robY");
 			Integer y = (int) (long) tmpY;
 			
-			//Robot robot = new Robot(name, x, y, false);
-			//gWorld.addRobot(x, y, robot);
-			
 			Drone drone = new Drone(name, actions, sensors, gWorld, x, y, 0, false);
 			gWorld.addDrone(x, y, drone);
 			drone.trainDrone(data);
 		}
 		return gWorld;
 	}
+	
 	private static void simulator(GridWorld world){
 		world.createWorld(true);
 		
