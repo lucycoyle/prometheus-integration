@@ -27,7 +27,11 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     }
     
     public Tuples think(int iterate, Tuples tuples) {
+    	if(text_simulator.Main.ioLayer==true) {
     	System.out.println("In the Neural Network");
+    	System.out.println("input tuples to NN:"+tuples.toSString());
+    	System.out.println("this layer has a dummy implementation so input tuples= output tuples");}
+    	
  
     	
     	return tuples;	

@@ -237,7 +237,9 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 	 * addActiveTags(fact1, fact2); }
 	 */
 	public Tuples think(int iterate, Tuples tuples) {
+		if(text_simulator.Main.ioLayer==true) {
 		System.out.println("In the Knowledge Node Network");
+		System.out.println("input tuples:"+tuples.toSString());}
 		loadData("data/robotData.txt");
 		Iterator<Tuple> iter = tuples.iterator();
 
@@ -248,14 +250,14 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 		}
 		// testInputs();
 		// Set<Tag> knOutputTags = lambdaThink(5); //0 for ply
+		if(text_simulator.Main.ioLayer==true) {
 		System.out.println("activeTags before knn search:");
-		System.out.println(getActiveTags());
+		System.out.println(getActiveTags());}
 		forwardThink(0);
 		Set<Tag> knOutputTags = getActiveTags();
+		if(text_simulator.Main.ioLayer==true) {
 		System.out.println("activeTags after knn search:");
-	
-
-		System.out.println(knOutputTags);
+		System.out.println(knOutputTags);}
 		Tuples knOutput = new Tuples();
 		int i = 0;
 		for (Tag t : knOutputTags) {
@@ -272,6 +274,10 @@ class KnowledgeNodeNetworkImpl implements KnowledgeNodeNetwork {
 			}
 
 			i++;
+		}
+		if(text_simulator.Main.ioLayer==true) {
+			System.out.println("knn output tuples:");
+			System.out.println(knOutput.toSString());
 		}
 		return knOutput;
 	}

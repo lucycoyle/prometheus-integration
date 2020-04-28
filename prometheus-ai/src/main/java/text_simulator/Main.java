@@ -15,6 +15,8 @@ import org.json.simple.parser.ParseException;
 
 public class Main {
 
+	//debug mode boolean--set to true to see inputs and outputs of layers.
+public static boolean ioLayer = false;
 	public static void main(String[] args){
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Enter the name of your config file: ");
@@ -327,86 +329,7 @@ public class Main {
 		}
 		
 	
-		/* runs the robots without the drones
-		for(int k = 0; k < 10; k++) {	// 10 iterations; at each iteration, the robot moves one step in a random direction
-			for(int i = 0; i < world.getWidth(); i++) {
-				for(int j = 0; j < world.getHeight(); j++) {
-					if(worldArray[i][j] == 3) {		//a robot is in this position
-						double direction = robots[i][j].randDirection();
-						robots[i][j].setDirection(direction);
-						if (direction < 0.25) {			//north
-							if(i == 0 || worldArray[i-1][j] != 0) {	//contains an object or cannot move because at border
-								System.out.println("Inside if of north");
-								world.getRobot(i, j).setMistake(true);
-								world.createWorld(false);
-							}
-							else {	//empty spot and robot can move
-								Robot newRob = new Robot(robots[i][j].getName(), i-1, j, false);
-								world.updateWorld(newRob, i-1, j, i, j);
-								world.createWorld(false);
-							}
-							try{
-								TimeUnit.SECONDS.sleep(1);
-							}
-							catch(InterruptedException e){
-								System.out.println("Wait issue");
-							}		
-						}
-						else if (direction < 0.5) {			//east
-							if(j == (world.getHeight() - 1) || worldArray[i][j+1] != 0) {	//contains an object
-								world.getRobot(i, j).setMistake(true);
-								world.createWorld(false);
-							}
-							else {	//empty spot and robot can move
-								Robot newRob = new Robot(robots[i][j].getName(), i, j+1, false);
-								world.updateWorld(newRob, i, j+1, i, j);
-								world.createWorld(false);
-							}
-							try{
-								TimeUnit.SECONDS.sleep(1);
-							}
-							catch(InterruptedException e){
-								System.out.println("Wait issue");
-							}	
-						}
-						else if (direction < 0.75) {			//south
-							if(i == (world.getWidth()-1) || worldArray[i+1][j] != 0) {	//contains an object
-								world.getRobot(i, j).setMistake(true);
-								world.createWorld(false);
-							}
-							else {	//empty spot and robot can move
-								Robot newRob = new Robot(robots[i][j].getName(), i+1, j, false);
-								world.updateWorld(newRob, i+1, j, i, j);
-								world.createWorld(false);
-							}
-							try{
-								TimeUnit.SECONDS.sleep(1);
-							}
-							catch(InterruptedException e){
-								System.out.println("Wait issue");
-							}	
-						}
-						else if (direction < 1) {			//west
-							if(j == 0 || worldArray[i][j-1] != 0) {	//contains an object
-								world.getRobot(i, j).setMistake(true);
-								world.createWorld(false);
-							}
-							else {	//empty spot and robot can move
-								Robot newRob = new Robot(robots[i][j].getName(), i, j-1, false);
-								world.updateWorld(newRob, i, j-1, i, j);
-								world.createWorld(false);
-							}
-							try{
-								TimeUnit.SECONDS.sleep(1);
-							}
-							catch(InterruptedException e){
-								System.out.println("Wait issue");
-							}	
-						}
-					}
-				}
-			}
-		} */
+	
 		
 		
 	} 

@@ -151,7 +151,10 @@ class ExpertSystemImpl implements ExpertSystem{
     }
 
     public Tuples think(int iterate, Tuples tuples) {
+    	if(text_simulator.Main.ioLayer==true) {
     	System.out.println("In the Expert System");
+    	System.out.println("input tuples to ES:");
+    	System.out.println(tuples.toSString());}
     	 Iterator<Tuple> iter= tuples.iterator();
     	   while(iter.hasNext()) {
     		Tuple t= iter.next();
@@ -196,9 +199,9 @@ class ExpertSystemImpl implements ExpertSystem{
     	for(Recommendation r: recommendations) {
     		addRecommendation(r);
     	} 
-    	//recommendations = getRecommendations();
+    	if(text_simulator.Main.ioLayer==true) {
     	System.out.println("recommendations:");
-    	System.out.println(recommendations);
+    	System.out.println(recommendations);}
     	Tuples recTuples = new Tuples();
     	
     	for(Recommendation r : recommendations) {
@@ -208,6 +211,10 @@ class ExpertSystemImpl implements ExpertSystem{
     		iParams[0] = (int)(r.getConfidence()*100);
     		recTuples.add(r.toString(), sParams, iParams);
     	}
+    	if(text_simulator.Main.ioLayer==true) {
+        
+        	System.out.println("output tuples of ES:");
+        	System.out.println(recTuples.toSString());}
     	return recTuples;
     }
 }
