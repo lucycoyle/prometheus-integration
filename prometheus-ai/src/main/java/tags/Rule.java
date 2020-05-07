@@ -232,9 +232,11 @@ public final class Rule extends Tag {
     private void addOutputPredicate(final String outputPredicate) {
         if (!outputPredicate.contains("@")) {
             final Fact p = new Fact(outputPredicate);
+            
             this.outputPredicates.add(p);
         } else {
             final Recommendation p = new Recommendation(outputPredicate);
+ 
             this.outputPredicates.add(p);
         }
     }

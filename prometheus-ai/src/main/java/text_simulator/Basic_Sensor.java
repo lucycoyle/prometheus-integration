@@ -62,11 +62,13 @@ public class Basic_Sensor {
 			int x = visible_cells[i][0];
 			int y = visible_cells[i][1];
 			System.out.println("inside getObject");
+			System.out.println("I " + i + " x: " + x + " y: " + y);
 			if(0 <= y && y < world.getWidth() && 0 <= x && x < world.getHeight()) {
-				if( worldArray[x][y] == 1) 
-					visible_object = world.getImObject(x,y);
+				System.out.println("world array value " + worldArray[x][y]);
+				if(worldArray[x][y] == 1) 
+					return world.getImObject(x,y);
 				else if( worldArray[x][y] == 3)
-					visible_object = world.getRobot(x, y);
+					return world.getRobot(x, y);
 			}
 			else
 				visible_object = null;
@@ -82,10 +84,10 @@ public class Basic_Sensor {
 		WorldObjects object = getObject(world, visible);
 		
 		if(object == null) {
-			return 1.0*weight;
+			return 1.0 * weight;
 		}
 		else if(object.getClass().equals(this.getSignal())) {
-			return -1.0*weight;
+			return -1.0 * weight;
 		}
 		else {
 			return 0.0;

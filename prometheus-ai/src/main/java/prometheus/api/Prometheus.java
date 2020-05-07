@@ -28,7 +28,7 @@ public interface Prometheus {
     /**
      * @return the Meta Reasoner (META)
      */
-    MetaReasoner getMetaReasoner();
+ //   MetaReasoner getMetaReasoner();
     
     Tuples think(Tuples t);
 }

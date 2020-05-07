@@ -27,23 +27,13 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     }
     
     public Tuples think(int iterate, Tuples tuples) {
-    	/*System.out.println("In the Neural Network");
-    	double[] data = new double[2];		
-    	int[] output = new int[2];
-    	Tuples tnnOutput = new Tuples();
-    	String[] labels = new String[2];
+    	if(text_simulator.Main.ioLayer==true) {
+    	System.out.println("In the Neural Network");
+    	System.out.println("input tuples to NN:"+tuples.toSString());
+    	System.out.println("this layer has a dummy implementation so input tuples= output tuples");}
     	
-    	for(int i = 0; i < numSensors; i++) {
-    		receiveDataStream(i, 0, data);
-    		double nnOutput = nn(data, i);	
-    		String name = "Sensor " + i;
-    		labels[0] = "distance";
-    		labels[1] = "probability";
-    		output[0] = (int) data[0];
-    		output[1] = (int) (nnOutput * 100);
-    		tnnOutput.add(name, labels, output);
-    	}
-    	return tnnOutput;	*/
+ 
+    	
     	return tuples;
     }
     

@@ -1,8 +1,11 @@
 package text_simulator;
 //robot with the AI
 
-import com.google.inject.Guice;
+import java.util.Iterator;
 
+import com.google.inject.*;
+
+import interfaces.Tuple;
 import interfaces.Tuples;
 import prometheus.api.Prometheus;
 import prometheus.guice.PrometheusModule;
@@ -171,20 +174,36 @@ public class Drone {
 		
 		Tuples t = new Tuples();
 		
-		
 		int i = 0;
-		int[] inputs = new int[this.sensors.length];
-		String[] labels= new String[this.sensors.length];
 		for(Basic_Sensor sensor : this.sensors) {
+			String name= "";
+			if (i==0) {
+			name="leftSensor";	
+			}
+			else if(i==1) {
+				name="frontSensor";
+			}
+			else if(i==2) {
+				name="rightSensor";
+			}
 			int[][] visible = getVisible(sensor);
-			inputs[i] = (int)sensor.score(world, visible);
-			labels[i]=sensor.getX().toString()+","+sensor.getY();
+			
+			int[] inputs = new int[1];
+			String [] labels = new String[1];
+			inputs[0]=	(int)sensor.score(world, visible);
+			labels[0]="probability";
+			System.out.println(name + ": " + inputs[0]);
 			i++;
+			t.add(name,labels,inputs);
 		}
-
 		
-		t.add("Sensors score",labels,inputs);
 		t = prometheus.think(t);
+		
+		Iterator<Tuple> iter= t.iterator();
+ 	   	while(iter.hasNext()) {
+ 	   		Tuple tuple= iter.next();
+ 	   		System.out.println(tuple.getLabel());
+		}
 		
 		try {
 			Action decision = convertToDecision(t);
@@ -199,7 +218,22 @@ public class Drone {
 	}
 	
 	private Action convertToDecision(Tuples t) throws indecisiveException{
-// TODO: Implement conversion
+		Iterator<Tuple> iter= t.iterator();
+		while(iter.hasNext()) {
+	 		Tuple tuple= iter.next();
+	 		if(tuple.getLabel().equals("@move[right]")) {
+	 			return this.actions[4];
+	 		}
+	 		else if(tuple.getLabel().equals("@move[left]")) {
+	 			return this.actions[3];
+	 		}
+	 		else if(tuple.getLabel().equals("@move[front]")) {
+	 			return this.actions[1];
+	 		}
+	 		else if(tuple.getLabel().equals("@move[back]")) {
+	 			return this.actions[6];
+	 		}
+		}
 		return null;
 	}
 	

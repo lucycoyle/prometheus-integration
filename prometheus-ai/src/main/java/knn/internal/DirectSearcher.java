@@ -38,6 +38,7 @@ class DirectSearcher {
     Set<Tag> search(final Tag inputTag) {
         final Set<Tag> activatedTags = new HashSet<>();
         if (mapKN.containsKey(inputTag)) {
+        	//System.out.println("foundkey");
             final KnowledgeNode kn = mapKN.get(inputTag);
             ageSortedKNs.remove(kn);
             final boolean fired = kn.excite();
@@ -50,6 +51,9 @@ class DirectSearcher {
                 ageSortedKNs.remove(kn);
             }
         }
+//        else {	
+//        	//System.out.println("notfoundkey");
+//        	}
         this.activeTags.add(inputTag);
         this.activeTags.addAll(activatedTags);
         return Collections.unmodifiableSet(activatedTags);

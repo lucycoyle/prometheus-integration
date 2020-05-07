@@ -2,12 +2,14 @@ package es.internal;
 
 import javax.inject.Inject;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Set;
 import com.google.inject.assistedinject.Assisted;
 import es.api.ExpertSystem;
 import interfaces.Tuple;
 import interfaces.Tuples;
 import tags.Fact;
+import tags.Predicate;
 import tags.Recommendation;
 import tags.Rule;
 import tags.Tag;
@@ -149,16 +151,57 @@ class ExpertSystemImpl implements ExpertSystem{
     }
 
     public Tuples think(int iterate, Tuples tuples) {
+    	if(text_simulator.Main.ioLayer==true) {
     	System.out.println("In the Expert System");
-    	for(Object t: tuples) {
-    		Fact f = new Fact(((Tuple) t).getSParams()[0]);
-        	addTag(f);
+    	System.out.println("input tuples to ES:");
+    	System.out.println(tuples.toSString());}
+    	 Iterator<Tuple> iter= tuples.iterator();
+    	   while(iter.hasNext()) {
+    		Tuple t= iter.next();
+    		if(t.getLabel()=="Fact") {
+   
+    			
+    			String factString= t.getSParams()[0].replaceAll("\\[", "(");
+    			factString= factString.replaceAll("\\]", ")");
+    			factString= factString.replaceAll(" ", "");
+   
+    			
+    		Fact f = new Fact( factString);
+  
+    		addFact(f);}
+    		else if (t.getLabel()=="Rule") {
+    
+    			String[] tokens= t.getSParams()[0].split("->");
+    			String middle1= tokens[0].substring(2,tokens[0].length()-2).replaceAll("\\[", "(");
+    			middle1= middle1.replaceAll("\\]", ")");
+ 
+    			String newfirsttok= tokens[0].substring(1,2)+middle1+tokens[0].substring(tokens[0].length()-1,tokens[0].length());
+    			
+    			
+    			String middle2= tokens[1].substring(2,tokens[1].length()-1).replaceAll("\\[", "(");
+    			middle2= middle2.replaceAll("\\]", ")");
+    			
+    			String newsectok= tokens[1].substring(0,1)+middle2+tokens[1].substring(tokens[1].length()-1,tokens[1].length()-1);
+    			newfirsttok= newfirsttok.replaceAll(" ", "");
+    			newfirsttok= newfirsttok.replaceAll("\\),", ") ");
+    			newsectok=newsectok.replaceAll(" ", "");
+    			String ruleString= newfirsttok+" -> "+newsectok;
+
+        		Rule r = new Rule( ruleString);
+        		
+        		addReadyRule(r);}
+        	
     	}
-    	Set<Recommendation> recommendations = think();
+    	
+    	 
+    	   
+    	Set<Recommendation> recommendations = think(); //diff than prometheus think
     	for(Recommendation r: recommendations) {
     		addRecommendation(r);
-    	}
-    	recommendations = getRecommendations();
+    	} 
+    	if(text_simulator.Main.ioLayer==true) {
+    	System.out.println("recommendations:");
+    	System.out.println(recommendations);}
     	Tuples recTuples = new Tuples();
     	
     	for(Recommendation r : recommendations) {
@@ -168,6 +211,10 @@ class ExpertSystemImpl implements ExpertSystem{
     		iParams[0] = (int)(r.getConfidence()*100);
     		recTuples.add(r.toString(), sParams, iParams);
     	}
+    	if(text_simulator.Main.ioLayer==true) {
+        
+        	System.out.println("output tuples of ES:");
+        	System.out.println(recTuples.toSString());}
     	return recTuples;
     }
 }

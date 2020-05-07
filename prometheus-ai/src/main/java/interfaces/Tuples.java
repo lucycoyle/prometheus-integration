@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class Tuples implements Iterable {
 
-	private ArrayList<Tuple> tupleList;
+	public ArrayList<Tuple> tupleList;
 
 
 	public Tuples(ArrayList<Tuple> input) {
@@ -15,10 +15,19 @@ public class Tuples implements Iterable {
 		this.tupleList = new ArrayList<Tuple>();
 	}
 
+	public String toSString() {
+		String full = "";
+		for (int i=0;i<this.tupleList.size();i++) {
+			full+=tupleList.get(i).toString()+"-----";
+		}
+		return full;
+	}
 	public void add(String name, String[] labels, int[] data){
 		Tuple t = new Tuple();
 		t.setTuple(name, labels, data);
+		
 		tupleList.add(t);
+	
 	}
 
 	@Override
@@ -53,6 +62,8 @@ public class Tuples implements Iterable {
 			return thisTuple;
 
 		}
+		
+		
 
 		// Used to remove an element. Implemented only if needed
 		public void remove() {
