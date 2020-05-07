@@ -34,8 +34,7 @@ class NeuralNetworkImpl implements NeuralNetwork, SensorInput {
     	
  
     	
-    	return tuples;	
-    	//return tnnOutput;
+    	return tuples;
     }
     
 }
